@@ -1,22 +1,34 @@
 # Alif Fairuz Portfolio
 
-A static résumé and portfolio site. The homepage introduces Alif as a marketing strategist specializing in digital media and performance, with analytics and AI workflow consulting.
+An editorial, single-viewport portfolio for a marketing strategist specializing in digital media and performance. Three.js renders an interactive field of media bars that changes shape with each tab.
 
-## Preview locally
+## Run locally
 
-From the repository root, run:
+Requires Node.js 18 or newer.
 
 ```sh
-python3 -m http.server 8000
+npm ci
+npm run dev
 ```
 
-Open http://localhost:8000.
+## Build for deployment
 
-## Edit and deploy
+```sh
+npm run build
+npm run preview
+```
 
-- Edit copy and panel content in `index.html`.
-- Edit layout and responsive styles in `styles.css`.
-- Edit navigation and panel behavior in `site.js`.
-- Replace the résumé or images in `assets/` and keep the corresponding paths in `index.html` current.
+Publish the generated `dist/` directory to a static host. The site uses hash routes, so server-side route rewrites are unnecessary.
 
-The repository root is the publish directory. No build command or environment variables are required. Before making the site public, review the résumé PDF and contact details.
+## Edit the site
+
+- `index.html` contains copy, images, role details, and service offers.
+- `src/styles.css` contains design tokens, typography, and responsive layouts.
+- `src/main.js` handles tabs, keyboard navigation, swipe, and hash links.
+- `src/motion.js` handles text reveals, metric count-up, and button interaction.
+- `src/scene.js` manages Three.js rendering, hover, tap ripples, and resource cleanup.
+- `src/poses.js` defines each tab’s scene position and shape.
+- `public/assets/` contains the résumé, images, and self-hosted fonts.
+- `design.md` records the supplied design brief.
+
+The scene pauses in hidden browser tabs and freezes time-based motion when reduced motion is enabled. The content works when WebGL is unavailable. Very small viewports and enlarged text can use internal panel scrolling as an accessibility fallback.
