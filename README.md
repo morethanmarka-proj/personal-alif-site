@@ -1,34 +1,34 @@
 # Alif Fairuz Portfolio
 
-An editorial, single-viewport portfolio for a marketing strategist specializing in digital media and performance. Three.js renders an interactive field of media bars that changes shape with each tab.
+A five-view portfolio for a performance-driven, business-minded marketing strategist. Vite, vanilla JavaScript, and Three.js; no framework migration.
 
-## Run locally
+## Run and build
 
 Requires Node.js 18 or newer.
 
 ```sh
 npm ci
 npm run dev
-```
-
-## Build for deployment
-
-```sh
 npm run build
 npm run preview
 ```
 
-Publish the generated `dist/` directory to a static host. The site uses hash routes, so server-side route rewrites are unnecessary.
+Publish `dist/` to a static host. Hash navigation requires no server route rewrites. Deployment is managed separately.
 
-## Edit the site
+## Edit
 
-- `index.html` contains copy, images, role details, and service offers.
-- `src/styles.css` contains design tokens, typography, and responsive layouts.
-- `src/main.js` handles tabs, keyboard navigation, swipe, and hash links.
-- `src/motion.js` handles text reveals, metric count-up, and button interaction.
-- `src/scene.js` manages Three.js rendering, hover, tap ripples, and resource cleanup.
-- `src/poses.js` defines each tab’s scene position and shape.
-- `public/assets/` contains the résumé, images, and self-hosted fonts.
-- `design.md` records the supplied design brief.
+- `index.html`: semantic compositions, profile, contact links, and Marka+ concept.
+- `src/content.js`: three qualitative case studies, skills, proof, service details, process, and illustrative examples.
+- `src/panels.js`: selection/reset rules, keyboard interaction, and mobile focused panels.
+- `src/main.js`: top-level navigation and hash links.
+- `src/styles.css`: five distinct layouts, desktop/portrait/landscape behavior, and foreground contrast.
+- `src/motion.js`: brief entrance and selection transitions.
+- `src/scene.js`: one Grainient renderer, pointer input, lifecycle, and reduced-motion behavior.
+- `src/effects/grainient.js`: animated background; blue Profile, red Work, purple Skills, green Services, light-gray Marka.
+- `public/assets/`: portrait, résumé, self-hosted fonts, and existing supporting assets.
 
-The scene pauses in hidden browser tabs and freezes time-based motion when reduced motion is enabled. The content works when WebGL is unavailable. Very small viewports and enlarged text can use internal panel scrolling as an accessibility fallback.
+## Content baseline
+
+`docs/specs/portfolio-content-v3.md` contains the supplied brief. The user's corrections in `docs/specs/confirmed-v3.md` take precedence. Older design and Anti-Slop reports describe historical versions, not the current requirements.
+
+The site replaces numerical result/award displays with qualitative cases. Small screens expose focused steps rather than stacked scrolling panels. Marka+ remains labeled pre-launch; its comparison examples are illustrative. Grainient runs continuously during normal viewing; reduced motion freezes it and hidden documents suspend frames. No pause buttons are exposed, as requested.

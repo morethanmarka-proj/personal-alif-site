@@ -8,636 +8,336 @@
     />
     <meta
       name="description"
-      content="Alif Fairuz · Marketing strategist specializing in digital media and performance, with a focus on analytics and practical AI adoption."
+      content="Alif Fairuz. Performance-driven. Business-minded. Digital Media & Performance Marketing Strategist."
     />
-    <title>Alif Fairuz | Marketing Strategist</title>
-
+    <title>Alif Fairuz | Performance-driven. Business-minded.</title>
     <script type="module" src="/src/main.js"></script>
   </head>
-  <body data-tone="dark">
+  <body data-panel="profile">
     <canvas id="media-scene" aria-hidden="true"></canvas>
     <div id="alif-stage">
       <header>
         <nav aria-label="Site sections">
-          <button
-            type="button"
-            data-view="profile"
-            aria-label="A bit about me"
-            aria-pressed="true"
-          >
-            <span>A bit about me</span
-            ><small aria-hidden="true">A bit about me</small>
-          </button>
-          <button
-            type="button"
-            data-view="work"
-            aria-label="What I've been up to"
-            aria-pressed="false"
-          >
-            <span>What I've been up to</span
-            ><small aria-hidden="true">What I've been up to</small>
-          </button>
-          <button
-            type="button"
-            data-view="skills"
-            aria-pressed="false"
-            aria-label="What shaped me"
-          >
-            <span>What shaped me</span
-            ><small aria-hidden="true">What shaped me</small>
-          </button>
-          <button
-            type="button"
-            data-view="services"
-            aria-label="How I can help you"
-            aria-pressed="false"
-          >
-            <span>How I can help you</span
-            ><small aria-hidden="true">How I can help you</small>
-          </button>
-          <button
-            type="button"
-            data-view="marka"
-            aria-pressed="false"
-            aria-label="Currently building"
-          >
-            <span>Currently building</span
-            ><small aria-hidden="true">Currently building</small>
-          </button>
+          <button data-view="profile">A bit about me</button>
+          <button data-view="work">What I've been up to</button>
+          <button data-view="skills">What shaped me</button>
+          <button data-view="services">How I can help you</button>
+          <button data-view="marka">Currently building</button>
         </nav>
       </header>
       <main>
-        <section
-          class="view profile-view"
-          data-screen="profile"
-          aria-label="A bit about me"
-        >
-          <div class="split profile-hero">
+        <section class="view profile-view" data-screen="profile">
+          <div class="profile-copy">
+            <p class="greeting">Hey, I'm Alif.</p>
+            <h1>Performance-driven.<br />Business-minded.</h1>
+            <p class="role">
+              Digital Media &amp; Performance Marketing Strategist
+            </p>
+            <p class="lead">
+              I connect media strategy, audience understanding, and business
+              thinking to help brands grow with purpose.
+            </p>
+            <div class="actions">
+              <a
+                class="primary"
+                href="mailto:aliffairuz.personal@gmail.com?subject=Let%27s%20connect"
+                ><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h18v14H3zM3 5l9 8 9-8" /></svg> Email me</a
+              ><a
+                href="https://www.linkedin.com/in/aliffairuz"
+                target="_blank"
+                rel="noopener"
+                ><span class="linkedin-icon" aria-hidden="true">in</span>
+                LinkedIn</a
+              >
+            </div>
+          </div>
+          <figure class="portrait">
+            <img
+              src="/assets/portrait.webp"
+              width="419"
+              height="747"
+              fetchpriority="high"
+              alt="Alif Fairuz"
+            />
+          </figure>
+          <div class="personal-band">
             <div>
-              <h1 class="home-title"><strong>Alif</strong> Fairuz</h1>
-              <p class="profile-positioning">
-                <strong>Marketing strategist</strong> specializing in digital
-                media and performance.
+              <h2>Different brands. Different challenges. Always learning.</h2>
+              <p>
+                From local businesses to regional platforms, I adapt my approach
+                without losing sight of marketing fundamentals.
               </p>
-              <div class="actions">
-                <a class="primary" href="mailto:aliffairuz.personal@gmail.com"
-                  >Get in touch</a
-                >
-                <a
-                  class="secondary"
-                  href="https://www.linkedin.com/in/alifairuuz"
-                  target="_blank"
-                  rel="noopener"
-                  >LinkedIn</a
-                >
-              </div>
             </div>
-            <div class="art">
-              <img
-                src="assets/portrait.webp"
-                alt="Portrait of Alif Fairuz"
-                width="419"
-                height="747"
-                fetchpriority="high"
-                decoding="async"
-              />
-            </div>
-          </div>
-          <div class="subnav" aria-label="Explore Alif’s profile">
-            <button type="button" data-intro="overview" aria-pressed="true">
-              Overview
-            </button>
-            <button type="button" data-intro="approach" aria-pressed="false">
-              How I work
-            </button>
-            <button type="button" data-intro="proof" aria-pressed="false">
-              Results &amp; awards
-            </button>
-          </div>
-          <div data-intro-panel="overview">
-            <p class="overview-lead">
-              Every good media plan starts with two honest questions: what does
-              the business actually need, and who are we trying to reach?
-            </p>
-            <p>
-              Over the past few years, I’ve planned, launched, and measured
-              digital campaigns for everyone from local Indonesian small
-              businesses to regional apps across Southeast Asia. I lean on data
-              to put budget where it genuinely works, and I build practical AI
-              workflows that save marketing teams from repetitive busywork.
-            </p>
-          </div>
-          <div data-intro-panel="approach" hidden>
-            <ul class="visual-grid profile-evidence">
-              <li>
-                <div>
-                  <strong>Start with the business</strong
-                  ><small
-                    >Define the growth goal, the audience, and the outcome we
-                    need to measure.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Build for the market</strong
-                  ><small
-                    >Turn strategy into a channel, budget, and creative plan,
-                    then carry it through execution.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Measure what changed</strong
-                  ><small
-                    >Use cost, conversion, and lift studies to understand what
-                    changed and where to invest next.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Apply AI to real work</strong
-                  ><small
-                    >Help teams pilot AI for tasks such as drafting briefs or
-                    assembling reports.</small
-                  >
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div data-intro-panel="proof" hidden>
-            <ul class="visual-grid profile-evidence">
-              <li>
-                <span class="proof-stat">−18%</span>
-                <div>
-                  <strong>MoveIt PH</strong
-                  ><small
-                    >Lower cost per acquisition (CPA) · M+C Saatchi campaign
-                    report</small
-                  >
-                </div>
-              </li>
-              <li>
-                <span class="proof-stat">+7%</span>
-                <div>
-                  <strong>Traveloka Malaysia</strong
-                  ><small
-                    >Marketing profitability quarter over quarter · Traveloka
-                    internal report, H2 2024</small
-                  >
-                </div>
-              </li>
-              <li>
-                <span class="proof-stat">Silver</span>
-                <div>
-                  <strong>2024 Cannes Silver Lion</strong
-                  ><small
-                    >Grab PH and GIGIL · No Sweat Summer · Viral Film winner,
-                    Cannes Lions 2024</small
-                  >
-                </div>
-              </li>
-              <li>
-                <span class="proof-stat">Gold</span>
-                <div>
-                  <strong
-                    ><a
-                      href="https://awards.marketing-interactive.com/marketing-excellence-ph/2026-winners/"
-                      >2026 Excellence in Media Strategy</a
-                    ></strong
-                  ><small
-                    >Grab and M+C Saatchi Performance · OneGrab Holiday</small
-                  >
-                </div>
-              </li>
-            </ul>
-          </div>
-          <footer class="marquee-pair" aria-label="Selected expertise and markets">
-            <div class="text-marquee" aria-label="Expertise">
-              <div class="marquee-track">
-                <div class="marquee-group">
-                  <span>Marketing and branding</span
-                  ><span>Performance marketing</span
-                  ><span>AI-powered marketing</span><span>Analytics</span
-                  ><span>Media planning</span><span>Paid media</span>
-                </div>
-                <div class="marquee-group" aria-hidden="true">
-                  <span>Marketing and branding</span
-                  ><span>Performance marketing</span
-                  ><span>AI-powered marketing</span><span>Analytics</span
-                  ><span>Media planning</span><span>Paid media</span>
-                </div>
-              </div>
-            </div>
-            <div class="text-marquee" aria-label="Experience">
-              <div class="marquee-track">
-                <div class="marquee-group">
-                  <span>Grab · Philippines, Cambodia, Myanmar</span
-                  ><span>MoveIt Philippines</span><span>Traveloka Malaysia</span
-                  ><span>Indonesian UMKM</span>
-                </div>
-                <div class="marquee-group" aria-hidden="true">
-                  <span>Grab · Philippines, Cambodia, Myanmar</span
-                  ><span>MoveIt Philippines</span><span>Traveloka Malaysia</span
-                  ><span>Indonesian UMKM</span>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </section>
-        <section class="view" data-screen="work" hidden>
-          <div class="work-heading">
-            <h2>Work experience</h2>
-          </div>
-          <div class="split work-layout">
-            <ol class="timeline" aria-label="Career timeline, newest first">
-              <li>
-                <button type="button" data-role="saatchi" aria-pressed="true">
-                  <strong>Media Planner</strong
-                  ><small>M+C Saatchi Performance · Oct 2025 – Present</small>
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  data-role="traveloka"
-                  aria-pressed="false"
-                >
-                  <strong>Senior Performance Marketing Analyst</strong
-                  ><small>Traveloka · Jul–Dec 2024</small>
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  data-role="senior-media"
-                  aria-pressed="false"
-                >
-                  <strong>Senior Media Executive</strong
-                  ><small>M+C Saatchi Performance · Apr–Jul 2024</small>
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  data-role="media-exec"
-                  aria-pressed="false"
-                >
-                  <strong>Media Executive</strong
-                  ><small>M+C Saatchi Performance · Mar 2022 – Apr 2024</small>
-                </button>
-              </li>
-            </ol>
-            <div class="work-detail">
-              <h3 id="work-client">MoveIt Philippines</h3>
-              <div class="subnav" aria-label="Work details">
-                <button
-                  type="button"
-                  data-work-section="client"
-                  aria-pressed="true"
-                >
-                  Client
-                </button>
-                <button
-                  type="button"
-                  data-work-section="responsibilities"
-                  aria-pressed="false"
-                >
-                  Responsibilities
-                </button>
-                <button
-                  type="button"
-                  data-work-section="channels"
-                  aria-pressed="false"
-                >
-                  Channels
-                </button>
-                <button
-                  type="button"
-                  data-work-section="results"
-                  aria-pressed="false"
-                >
-                  Results
-                </button>
-              </div>
-              <div id="work-content"></div>
+            <div class="personal-links">
+              <p class="traits">Adaptable · Collaborative · Curious</p>
+              <button class="text-action" data-go="work">
+                Explore my work <span aria-hidden="true">↗</span>
+              </button>
             </div>
           </div>
         </section>
-        <section class="view" data-screen="skills" hidden>
-          <h2>Expertise, Skills &amp; Education</h2>
-          <div class="subnav" aria-label="Explore details">
-            <button type="button" data-skill="expertise" aria-pressed="true">
-              Expertise</button
-            ><button type="button" data-skill="tools" aria-pressed="false">
-              Tools</button
-            ><button
-              type="button"
-              data-skill="credentials"
-              aria-pressed="false"
-            >
-              Certifications</button
-            ><button type="button" data-skill="education" aria-pressed="false">
-              Education
-            </button>
+        <section
+          class="view work-view"
+          data-screen="work"
+          data-focus="gallery"
+          hidden
+        >
+          <div class="view-heading">
+            <h2>From doing the work to shaping the direction.</h2>
+            <p>
+              Different brands, different markets, and a growing responsibility
+              for the bigger media picture.
+            </p>
           </div>
-          <div data-skill-panel="expertise">
-            <ul class="visual-grid">
-              <li>
-                <div>
-                  <strong>Marketing strategy &amp; performance media</strong
-                  ><small
-                    >Audience strategy, full-funnel planning, budget allocation,
-                    and channel testing.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Analytics &amp; measurement</strong
-                  ><small
-                    >Brand Lift, Conversion Lift, attribution, and
-                    incrementality.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Client partnerships</strong
-                  ><small
-                    >Translate business goals into media plans and
-                    reporting.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>AI workflow adoption</strong
-                  ><small
-                    >Identify and redesign marketing workflows where AI can
-                    help.</small
-                  >
-                </div>
-              </li>
-            </ul>
+          <div class="focus-nav" data-focus-nav="work" aria-label="Work panels">
+            <button data-focus-value="gallery">Case gallery</button
+            ><button data-focus-value="insight">Case insight</button>
           </div>
-          <div data-skill-panel="tools" hidden>
-            <ul class="visual-grid">
-              <li>
-                <div>
-                  <strong>Google Ads &amp; Marketing Platform</strong
-                  ><small
-                    >Search, Display, YouTube, DV360, and Campaign Manager
-                    360.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Meta &amp; TikTok Ads Manager</strong
-                  ><small
-                    >Full-funnel paid social planning, audience testing, and
-                    creative optimization.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>GA4, Power BI &amp; Tableau</strong
-                  ><small
-                    >Attribution tracking, funnel diagnostics, and automated
-                    performance dashboards.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Python &amp; R</strong
-                  ><small
-                    >Marketing data analysis, budget modeling, and workflow
-                    automation scripts.</small
-                  >
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div data-skill-panel="credentials" hidden>
-            <ul class="visual-grid certifications">
-              <li>
-                <div>
-                  <strong>Google Ads</strong
-                  ><small>Search Ads Professional Certification</small>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Meta</strong
-                  ><small>Media Buying Professional Certification</small>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Meta</strong
-                  ><small>Media Planning Professional Certification</small>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>TikTok</strong
-                  ><small>Media Buying Professional Certification</small>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div data-skill-panel="education" hidden>
-            <ul class="visual-grid">
-              <li>
-                <div>
-                  <strong>MSc in Management</strong
-                  ><small
-                    >National University of Singapore · Jan–Nov 2025 · 4.40 /
-                    5.00</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Bachelor of Management</strong
-                  ><small>Institut Teknologi Bandung · 3.43 / 4.00</small>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Business analytics</strong
-                  ><small
-                    >Business and pricing analytics, innovation, and brand
-                    alignment.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>AI in marketing</strong
-                  ><small
-                    >Graduate coursework in applying AI to marketing.</small
-                  >
-                </div>
-              </li>
-            </ul>
+          <div class="case-layout">
+            <aside class="case-rail" data-mobile-zone="gallery">
+              <div
+                id="case-selector"
+                class="selector-list"
+                aria-label="Choose a case"
+              ></div>
+              <p class="career-strip">
+                Local MSMEs → Grab PH → Traveloka MY → MOVE IT PH
+              </p>
+              <p class="micro">
+                Primary: Philippines · Malaysia<br />Additional regional
+                campaign support
+              </p>
+              <a
+                class="text-action"
+                href="/assets/resume.pdf"
+                target="_blank"
+                rel="noopener"
+                >View résumé ↗</a
+              >
+            </aside>
+            <figure class="case-canvas" data-mobile-zone="gallery">
+              <figcaption id="case-caption"></figcaption>
+              <div id="case-diagram" class="case-diagram"></div>
+              <p class="micro">Conceptual diagram · not measured results</p>
+            </figure>
+            <div class="case-insight" data-mobile-zone="insight">
+              <p id="case-role" class="micro"></p>
+              <h3 id="case-title"></h3>
+              <div
+                id="case-tabs"
+                class="subnav"
+                aria-label="Case insight"
+              ></div>
+              <p id="case-note" class="detail-note" aria-live="polite"></p>
+            </div>
           </div>
         </section>
-        <section class="view" data-screen="services" hidden>
-          <h2>Services</h2>
-          <div class="subnav" aria-label="Service offers">
-            <button type="button" data-service="media" aria-pressed="true">
-              Paid Media Management</button
-            ><button type="button" data-service="audit" aria-pressed="false">
-              Paid Media Audit</button
-            ><button type="button" data-service="ai" aria-pressed="false">
-              AI Workflow Consulting
-            </button>
-          </div>
-          <div data-service-panel="media">
+        <section
+          class="view skills-view"
+          data-screen="skills"
+          data-focus="stages"
+          hidden
+        >
+          <div class="view-heading">
+            <h2>
+              Built on fundamentals.<br />Shaped by experience. Always evolving.
+            </h2>
             <p>
-              For teams that need a partner to turn growth goals into a media
-              strategy and manage execution through reporting.
+              Business thinking underneath, media expertise in practice, and
+              smarter systems on the horizon.
             </p>
-            <ul class="visual-grid">
-              <li>
-                <div>
-                  <strong>Media plan</strong
-                  ><small
-                    >Audience, channel mix, budget, and conversion goals.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Campaign launch</strong
-                  ><small
-                    >Set up campaigns and run quality checks across the agreed
-                    platforms.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Ongoing optimization</strong
-                  ><small
-                    >Review pacing, test creative and audiences, and adjust
-                    spend.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Performance reporting</strong
-                  ><small
-                    >See what changed, what drove results, and where to invest
-                    next.</small
-                  >
-                </div>
-              </li>
-            </ul>
           </div>
-          <div data-service-panel="audit" hidden>
-            <p>
-              For teams already advertising that need a clear plan to improve
-              results.
-            </p>
-            <ul class="visual-grid">
-              <li>
-                <div>
-                  <strong>Account review</strong
-                  ><small
-                    >Find gaps in campaign structure, spend, audience, and
-                    creative.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Measurement review</strong
-                  ><small
-                    >Check conversion signals and show where your team can
-                    improve tracking.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Growth plan</strong
-                  ><small
-                    >Get a prioritized list of fixes and tests, with suggested
-                    success metrics.</small
-                  >
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div data-service-panel="ai" hidden>
-            <p>
-              For marketing teams that want to pilot AI for a task like
-              reporting or creative briefing.
-            </p>
-            <ul class="visual-grid">
-              <li>
-                <div>
-                  <strong>Workflow review</strong
-                  ><small
-                    >Select one task and agree on what better looks like.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Pilot</strong
-                  ><small
-                    >Test the workflow on a real task and agree on human review
-                    steps.</small
-                  >
-                </div>
-              </li>
-              <li>
-                <div>
-                  <strong>Team handover</strong
-                  ><small
-                    >Get reusable templates, a documented process, and measures
-                    for adoption.</small
-                  >
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="actions">
-            <a
-              class="primary"
-              href="mailto:aliffairuz.personal@gmail.com?subject=Project%20inquiry"
-              >Discuss a project</a
-            >
-          </div>
-        </section>
-        <section class="view" data-screen="marka" hidden>
-          <svg
-            class="lock-icon"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
+          <div
+            class="focus-nav"
+            data-focus-nav="skills"
+            aria-label="Skills panels"
           >
-            <rect x="4" y="11" width="16" height="10" />
-            <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-          </svg>
-          <h2>More Than Marka</h2>
-          <div class="marka-rule" aria-hidden="true"></div>
-          <p class="status">
-            morethanmarka.com · Independent strategy practice in development
-          </p>
+            <button data-focus-value="stages">My foundation</button
+            ><button data-focus-value="detail">Capabilities</button
+            ><button data-focus-value="proof">Education &amp; tools</button>
+          </div>
+          <div class="skills-layout">
+            <div
+              class="funnel"
+              id="skill-stages"
+              data-mobile-zone="stages"
+              aria-label="Professional development stages"
+            ></div>
+            <div class="skill-detail" data-mobile-zone="detail">
+              <h3 id="stage-title"></h3>
+              <p id="stage-thesis"></p>
+              <div
+                class="chips"
+                id="capabilities"
+                aria-label="Capabilities"
+              ></div>
+              <p
+                id="capability-note"
+                class="detail-note"
+                aria-live="polite"
+              ></p>
+              <p id="stage-proof" class="micro"></p>
+              <button
+                class="text-action"
+                id="marka-shortcut"
+                data-go="marka"
+                hidden
+              >
+                Explore Marka+ ↗
+              </button>
+            </div>
+          </div>
+          <div class="proof-dock" data-mobile-zone="proof">
+            <div
+              class="subnav"
+              id="proof-tabs"
+              aria-label="Education and tools"
+            ></div>
+            <div
+              id="proof-content"
+              class="proof-content"
+              aria-live="polite"
+            ></div>
+          </div>
+        </section>
+        <section
+          class="view services-view"
+          data-screen="services"
+          data-focus="select"
+          hidden
+        >
+          <div class="view-heading">
+            <h2>Good marketing starts with the right problem.</h2>
+            <p>
+              Strategy when you need direction. Hands-on delivery when you need
+              action.
+            </p>
+          </div>
+          <div
+            class="focus-nav"
+            data-focus-nav="services"
+            aria-label="Service panels"
+          >
+            <button data-focus-value="select">Choose a service</button
+            ><button data-focus-value="detail">Offer details</button
+            ><button data-focus-value="process">How I work</button>
+          </div>
+          <div class="service-layout">
+            <aside
+              id="service-selector"
+              class="selector-list"
+              data-mobile-zone="select"
+              aria-label="Choose a service"
+            ></aside>
+            <div class="service-offer" data-mobile-zone="detail">
+              <h3 id="service-name"></h3>
+              <p id="service-promise" class="offer-promise"></p>
+              <p id="service-audience" class="micro"></p>
+              <div
+                class="subnav"
+                id="service-tabs"
+                aria-label="Service details"
+              ></div>
+              <div class="offer-detail">
+                <div
+                  id="service-items"
+                  class="item-list"
+                  aria-label="Choose a detail"
+                ></div>
+                <div class="offer-preview">
+                  <p id="service-description" aria-live="polite"></p>
+                  <button
+                    id="boundary-toggle"
+                    class="text-action"
+                    aria-expanded="false"
+                  >
+                    Scope boundaries
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="process" data-mobile-zone="process">
+            <div>
+              <div
+                id="process-steps"
+                class="process-steps"
+                aria-label="How I work"
+              ></div>
+              <p id="process-note" aria-live="polite"></p>
+            </div>
+            <a
+              id="service-contact"
+              class="primary"
+              href="mailto:aliffairuz.personal@gmail.com"
+              >Discuss a project ↗</a
+            >
+          </div>
+        </section>
+        <section
+          class="view marka-view"
+          data-screen="marka"
+          data-focus="concept"
+          hidden
+        >
+          <div class="marka-heading">
+            <div>
+              <p class="status">v0 · Pre-launch</p>
+              <h2>Less generic AI.<br />More brand thinking.</h2>
+              <p>
+                Exploring how business context and marketing frameworks can
+                guide better AI-assisted content.
+              </p>
+            </div>
+            <span class="marka-wordmark">Marka+</span>
+          </div>
+          <div
+            class="focus-nav"
+            data-focus-nav="marka"
+            aria-label="Marka panels"
+          >
+            <button data-focus-value="concept">The concept</button
+            ><button data-focus-value="example">Illustrative example</button>
+          </div>
+          <ol class="pipeline" data-mobile-zone="concept">
+            <li>Business &amp;<br />brand context</li>
+            <li>Marketing<br />framework</li>
+            <li>AI-assisted<br />workflow</li>
+            <li>Contextual<br />content direction</li>
+          </ol>
+          <div class="marka-comparison" data-mobile-zone="example">
+            <div class="comparison-header">
+              <div
+                id="example-tabs"
+                class="subnav"
+                aria-label="Illustrative approach"
+              ></div>
+              <p class="micro">
+                Illustrative example · not an actual Marka+ output
+              </p>
+            </div>
+            <div class="comparison-panes">
+              <div>
+                <h3>Input</h3>
+                <p id="example-input"></p>
+              </div>
+              <div>
+                <h3>Content direction</h3>
+                <p id="example-output"></p>
+                <p id="example-caption" class="micro"></p>
+              </div>
+            </div>
+          </div>
+          <footer class="marka-footer">
+            <p>
+              In development. Exploring a faster framework-first creation
+              process.
+            </p>
+            <p>Salience · Relevance · Context</p>
+            <a href="https://morethanmarka.com" target="_blank" rel="noopener"
+              >Explore morethanmarka.com ↗</a
+            >
+          </footer>
         </section>
       </main>
     </div>

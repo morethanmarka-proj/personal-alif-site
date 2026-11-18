@@ -45,14 +45,14 @@ const TAB_COLORS = {
   profile: new THREE.Color(0x1b3bff),
   work: new THREE.Color(0xdc2626),
   skills: new THREE.Color(0x7c3aed),
-  services: new THREE.Color(0x52525b),
-  marka: new THREE.Color(0x10b981),
+  services: new THREE.Color(0x10b981),
+  marka: new THREE.Color(0xd4d4d8),
 };
 
 const DISP = `
 precision highp float;
 uniform sampler2D uStir; uniform vec2 uPtr, uDir; uniform vec3 uColor;
-uniform float uTime, uAsp, uPress, uAmp, uWarp, uScale, uGrain, uGrainPx;
+uniform float uTime, uAsp, uPress, uAmp, uWarp, uScale, uGrain, uGrainPx, uLight;
 varying vec2 vUv;
 float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 float vn(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3. - 2.*f);
@@ -80,6 +80,7 @@ void main(){
   c = mix(c, uColor * .86, smoothstep(.45, .85, v));
   c = mix(c, uColor, smoothstep(.85, 1., v));
   c += (n - .5) * uGrain * (1. - abs(v - .5) * 1.5);
+  c = mix(c, vec3(.68) + vec3(v * .23) + (n - .5) * .025, uLight);
   gl_FragColor = vec4(clamp(c, 0., 1.), 1.);
 }`;
 
@@ -137,6 +138,7 @@ export function createGrainient(renderer) {
       uGrainPx: { value: 1 },
       uDir: { value: new THREE.Vector2(...P.dir) },
       uColor: { value: TAB_COLORS.profile.clone() },
+      uLight: { value: 0 },
     },
     vertexShader: VERT,
     fragmentShader: DISP,
@@ -172,6 +174,7 @@ export function createGrainient(renderer) {
       s.uPress.value = d.uPress.value = state.press;
       s.uAmp.value = d.uAmp.value = state.amp;
       const targetColor = TAB_COLORS[state.tab] || TAB_COLORS.profile;
+      d.uLight.value = state.tab === "marka" ? 1 : 0;
       const lerpAlpha = dt > 0 ? 1 - Math.exp(-dt * 6) : 1;
       d.uColor.value.lerp(targetColor, lerpAlpha);
       s.uGain.value = P.gain * Math.min(Math.max(dt, 0.001) * 60, 2);
