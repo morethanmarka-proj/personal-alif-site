@@ -3,6 +3,8 @@ export const cases = [
     id: "moveit",
     brand: "MOVE IT Philippines",
     emphasis: "Strategic Media Planning · Current",
+    summary:
+      "Full-funnel media planning for a high-frequency motorcycle taxi challenger in Metro Manila.",
     title: "Planning beyond the dashboard.",
     role: "Digital Media Planner · M+C Saatchi Performance",
     diagram: ["Business conditions", "User demand", "Media decisions"],
@@ -13,38 +15,42 @@ export const cases = [
     ],
     notes: {
       Context:
-        "Mobility performance is shaped by more than advertising: supply, weather, traffic, and competition all influence demand.",
+        "Mobility demand is shaped by real-world conditions beyond ad platforms. Rider supply, heavy rain, rush-hour congestion, and rival promos shift conversion rates hour by hour across Metro Manila.",
       "My role":
-        "Translate business objectives into audience, channel, investment, and full-funnel media recommendations; coordinate client and delivery teams.",
+        "Translate commercial ride targets into audience architecture, channel mix, investment pacing, and full-funnel media recommendations while aligning client and buying teams.",
       Thinking:
-        "Interpret campaign signals alongside operating conditions before deciding whether to optimize media, reconsider audiences, or challenge assumptions.",
+        "Read platform signals alongside live operating conditions before deciding whether to reallocate budget, refresh creative angles, or hold spend when supply is constrained.",
       Learning:
-        "Good media planning responds to business reality, beyond platform metrics.",
+        "Why it matters: dashboard metrics never tell the whole story. Effective media planning means diagnosing the real business bottleneck first so paid media scales demand only where operations can fulfill it.",
     },
   },
   {
     id: "grab",
     brand: "Grab Philippines",
     emphasis: "No Sweat Summer · Integrated Media",
+    summary:
+      "Integrated nationwide summer campaign connecting upper-funnel salience with daily app transactions.",
     title: "No Sweat Summer: full-funnel media at scale.",
     role: "Media Executive / Senior Media Executive · M+C Saatchi Performance",
     diagram: ["Awareness", "Consideration", "Conversion"],
     tags: ["Paid social", "Programmatic", "Media partners"],
     notes: {
       Context:
-        "An integrated seasonal campaign requiring aligned reach, engagement, and conversion activity across multiple channels.",
+        "A flagship seasonal campaign during peak Philippine summer travel and commuting, requiring synchronized reach, viral film engagement, and app conversion across multiple channels.",
       "My role":
-        "Owned media execution and co-developed strategy with planning teams across paid social, programmatic, and third-party media.",
+        "Owned end-to-end media activation and co-developed channel strategy with planning leads across paid social, programmatic video, and local publisher partnerships.",
       Thinking:
-        "Coordinate audiences, media mix, creative testing, delivery, and measurement across the funnel rather than treating channels in isolation.",
+        "Sequence audiences, frequency caps, creative formats, and conversion retargeting as one connected funnel rather than running awareness and performance in separate silos.",
       Learning:
-        "Large campaigns work when strategic choices and delivery discipline reinforce each other.",
+        "Why it matters: breakout creative needs disciplined media choreography. When upper-funnel reach and lower-funnel retargeting share one audience map, cultural attention turns into measurable app demand.",
     },
   },
   {
     id: "traveloka",
     brand: "Traveloka Malaysia",
     emphasis: "#HargaBagus · Brand × Performance",
+    summary:
+      "In-house brand-meets-performance campaign positioning Traveloka as Malaysia's smart value travel platform.",
     title: "#HargaBagus: where brand meets performance.",
     role: "Senior Performance Marketing Analyst · Traveloka",
     diagram: ["Brand priorities", "Product priorities", "Media strategy"],
@@ -52,13 +58,13 @@ export const cases = [
     outcome: "Coordinated campaign",
     notes: {
       Context:
-        "A Malaysia-market branding initiative requiring media decisions to support broader brand and customer objectives.",
+        "A Malaysia-market brand initiative (#HargaBagus) designed to build price-trust perception while maintaining commercial efficiency across flights and accommodation products.",
       "My role":
-        "Planned and managed campaign media; collaborated with and helped lead discussions involving brand and product marketing teams.",
+        "Planned and managed paid media investment in-house, leading cross-functional alignment between brand marketing, product commercial owners, and regional analytics.",
       Thinking:
-        "Connect audience, placement, and measurement choices with brand objectives, beyond short-term media efficiency.",
+        "Balance high-impact brand placements with conversion-intent signals so upper-funnel storytelling feeds product search and booking velocity.",
       Learning:
-        "The in-house perspective makes cross-functional alignment part of effective performance marketing.",
+        "Why it matters: working in-house taught me that media efficiency means little if brand, product, and performance teams pull in different directions. Shared commercial definitions make every ringgit work harder.",
     },
   },
 ];
@@ -73,15 +79,15 @@ export const stages = [
     capabilities: [
       [
         "Business strategy",
-        "Connect marketing objectives with commercial priorities.",
+        "Connect marketing objectives with commercial priorities and unit economics.",
       ],
       [
         "Consumer & brand",
-        "Understand relevance, perception, and customer behavior.",
+        "Understand salience, relevance, perception, and customer buying behavior.",
       ],
       [
         "Marketing analytics",
-        "Use evidence to question assumptions and improve decisions.",
+        "Use evidence to question assumptions and improve investment decisions.",
       ],
     ],
   },
@@ -94,7 +100,7 @@ export const stages = [
     capabilities: [
       [
         "Audience & media planning",
-        "Segmentation, media mix, full-funnel plans, and budget decisions.",
+        "Segmentation, media mix, full-funnel plans, and budget allocation decisions.",
       ],
       [
         "Paid media execution",
@@ -102,7 +108,7 @@ export const stages = [
       ],
       [
         "Measurement & testing",
-        "Reporting, optimization, lift studies, and experimentation.",
+        "Reporting, optimization, lift studies, and structured experimentation.",
       ],
       [
         "Stakeholder leadership",
@@ -115,7 +121,7 @@ export const stages = [
     summary: "Analytics · AI · Systems",
     thesis:
       "Using analytics, AI, and automation to improve marketing work while preserving human judgment.",
-    proof: "Marka+ · Independent, pre-launch v0 experiment",
+    proof: "Marka+ Lab · Independent, pre-launch v0 experiment",
     capabilities: [
       [
         "Reporting workflows",
@@ -123,39 +129,51 @@ export const stages = [
       ],
       [
         "No-code integrations",
-        "Connect repeatable tasks through practical automation.",
+        "Connect repeatable tasks through practical workflow automation.",
       ],
       [
         "AI-assisted marketing",
-        "Ground content workflows in brand and business context.",
+        "Ground content and planning workflows in brand and business context.",
       ],
     ],
   },
 ];
 export const proof = {
   Education: [
-    ["Institut Teknologi Bandung", "Bachelor of Management"],
-    ["NUS Business School", "MSc in Management"],
+    ["Institut Teknologi Bandung", "Bachelor of Management (BSM)"],
+    ["NUS Business School", "MSc in Management (MiM)"],
   ],
   Platforms: [
-    ["Meta Ads", ""],
-    ["Google Ads", ""],
-    ["TikTok Ads", ""],
-    ["DV360", ""],
-    ["Programmatic / Ad Networks", ""],
+    ["Meta Ads", "Full-funnel social buying & planning"],
+    ["Google Ads", "Search, Display, YouTube & App"],
+    ["TikTok Ads", "Short-form video & reach planning"],
+    ["DV360", "Programmatic display & video"],
+    ["Ad Networks", "Regional publisher & app partners"],
   ],
   Analytics: [
-    ["Power BI", ""],
-    ["Tableau", ""],
-    ["Python", ""],
-    ["R", ""],
-    ["Marketing measurement", ""],
+    ["Power BI", "Automated campaign dashboards"],
+    ["Tableau", "Cross-market visual diagnostics"],
+    ["Python", "Data cleaning & budget scripts"],
+    ["R", "Statistical modeling & analysis"],
+    ["Measurement", "Brand Lift, Conversion Lift & MMP"],
   ],
   Credentials: [
-    ["Google Ads", "Search Ads Professional Certification"],
-    ["Meta", "Media Buying Professional Certification"],
-    ["Meta", "Media Planning Professional Certification"],
-    ["TikTok", "Media Buying Professional Certification"],
+    [
+      "Google Display / Video / Search Certified",
+      "Verified proficiency across Google Search, Display, and YouTube video formats",
+    ],
+    [
+      "Meta Media Buying & Planning Certified",
+      "Blueprint certified in auction buying and full-funnel media architecture",
+    ],
+    [
+      "TikTok Media Planning Certified",
+      "Certified in short-form video strategy, audience planning, and delivery",
+    ],
+    [
+      "Apple Search Ads, LinkedIn & AppsFlyer",
+      "Hands-on execution across app store search, B2B social, and mobile attribution",
+    ],
   ],
 };
 export const services = [
@@ -376,11 +394,12 @@ export const examples = [
     caption: "Broad output with little brand-specific direction.",
   },
   {
-    name: "Framework-first",
+    name: "Marka+ Lab workflow",
     input:
-      "Coffee brand + office workers + afternoon occasion + accessible price point.",
-    output: "Jam 3 sore, kenapa kopi selalu jadi ide bagus?",
+      "Instagram Account + Brand Description + Product + Audience Targeting",
+    output:
+      "20++ funnel and framework-based ready to use content and creatives (intended workflow)",
     caption:
-      "A specific angle informed by audience, occasion, and brand context.",
+      "Structured across awareness, consideration, and conversion with brand context built in.",
   },
 ];

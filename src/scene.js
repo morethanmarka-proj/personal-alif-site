@@ -48,7 +48,7 @@ export function createScene(canvas) {
     renderer.render(current.scene, current.camera);
   }
   function loop(now) {
-    if (disposed || lost || document.hidden || reduced.matches) return;
+    if (disposed || lost || document.hidden) return;
     const dt = Math.min((now - (last || now)) / 1000, 0.05);
     last = now;
     state.time += dt;
@@ -72,7 +72,7 @@ export function createScene(canvas) {
     last = 0;
     if (disposed || lost || document.hidden) return;
     draw();
-    if (!reduced.matches) frame = requestAnimationFrame(loop);
+    frame = requestAnimationFrame(loop);
   }
   function resize() {
     width = innerWidth;
@@ -85,12 +85,10 @@ export function createScene(canvas) {
     resume();
   }
   function track(event) {
-    if (reduced.matches) return;
     target.set(event.clientX / width, 1 - event.clientY / height);
     idle = 0;
   }
   function press(event) {
-    if (reduced.matches) return;
     if (event.target.closest("button,a,input,select,textarea")) return;
     track(event);
     state.p.copy(target);

@@ -22,24 +22,36 @@
           <button data-view="work">What I've been up to</button>
           <button data-view="skills">What shaped me</button>
           <button data-view="services">How I can help you</button>
-          <button data-view="marka">Currently building</button>
+          <button data-view="marka">Marka+ Lab</button>
         </nav>
       </header>
       <main>
         <section class="view profile-view" data-screen="profile">
           <div class="profile-copy">
             <p class="greeting">Hey, I'm Alif.</p>
-            <h1>Performance-driven.<br />Business-minded.</h1>
+            <h1>
+              Performance-driven.<br /><span class="u-hl"
+                >Business-minded.</span
+              >
+            </h1>
             <p class="role">
-              Digital Media &amp; Performance Marketing Strategist
+              <strong>Digital Media &amp; Performance Marketing Strategist</strong>
             </p>
             <p class="lead">
-              I connect media strategy, audience understanding, and business
-              thinking to help brands grow with purpose.
+              I connect <strong class="hl">media strategy</strong>,
+              <strong class="hl">audience understanding</strong>, and
+              <strong class="hl">business thinking</strong> to help brands grow
+              with purpose.
             </p>
             <div class="actions">
+              <button
+                type="button"
+                class="primary cta-hero"
+                data-go="work"
+              >
+                Explore my work <span aria-hidden="true">↗</span>
+              </button>
               <a
-                class="primary"
                 href="mailto:aliffairuz.personal@gmail.com?subject=Let%27s%20connect"
                 ><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5h18v14H3zM3 5l9 8 9-8" /></svg> Email me</a
               ><a
@@ -51,21 +63,15 @@
               >
             </div>
           </div>
-          <figure class="portrait">
-            <img
-              src="/assets/portrait.webp"
-              width="419"
-              height="747"
-              fetchpriority="high"
-              alt="Alif Fairuz"
-            />
-          </figure>
           <div class="personal-band">
             <div>
-              <h2>Different brands. Different challenges. Always learning.</h2>
+              <h2>
+                Different brands. Different challenges.
+                <strong class="hl">Always learning.</strong>
+              </h2>
               <p>
                 From local businesses to regional platforms, I adapt my approach
-                without losing sight of marketing fundamentals.
+                without losing sight of <strong>marketing fundamentals</strong>.
               </p>
             </div>
             <div class="personal-links">
@@ -83,10 +89,13 @@
           hidden
         >
           <div class="view-heading">
-            <h2>From doing the work to shaping the direction.</h2>
+            <h2>
+              From doing the work to
+              <strong class="hl">shaping the direction.</strong>
+            </h2>
             <p>
               Different brands, different markets, and a growing responsibility
-              for the bigger media picture.
+              for the <strong>bigger media picture</strong>.
             </p>
           </div>
           <div class="focus-nav" data-focus-nav="work" aria-label="Work panels">
@@ -116,9 +125,12 @@
               >
             </aside>
             <figure class="case-canvas" data-mobile-zone="gallery">
-              <figcaption id="case-caption"></figcaption>
+              <div class="case-canvas-head">
+                <figcaption id="case-caption"></figcaption>
+                <p id="case-summary" class="case-summary"></p>
+              </div>
               <div id="case-diagram" class="case-diagram"></div>
-              <p class="micro">Conceptual diagram · not measured results</p>
+              <p class="micro">Conceptual diagram · click or watch flow</p>
             </figure>
             <div class="case-insight" data-mobile-zone="insight">
               <p id="case-role" class="micro"></p>
@@ -140,11 +152,13 @@
         >
           <div class="view-heading">
             <h2>
-              Built on fundamentals.<br />Shaped by experience. Always evolving.
+              Built on <strong class="hl">fundamentals.</strong><br />Shaped by
+              <strong class="hl">experience.</strong> Always evolving.
             </h2>
             <p>
-              Business thinking underneath, media expertise in practice, and
-              smarter systems on the horizon.
+              <strong>Business thinking</strong> underneath,
+              <strong>media expertise</strong> in practice, and
+              <strong>smarter systems</strong> on the horizon.
             </p>
           </div>
           <div
@@ -183,7 +197,7 @@
                 data-go="marka"
                 hidden
               >
-                Explore Marka+ ↗
+                Explore Marka+ Lab ↗
               </button>
             </div>
           </div>
@@ -207,10 +221,13 @@
           hidden
         >
           <div class="view-heading">
-            <h2>Good marketing starts with the right problem.</h2>
+            <h2>
+              Good marketing starts with the
+              <strong class="hl">right problem.</strong>
+            </h2>
             <p>
-              Strategy when you need direction. Hands-on delivery when you need
-              action.
+              <strong>Strategy</strong> when you need direction.
+              <strong>Hands-on delivery</strong> when you need action.
             </p>
           </div>
           <div
@@ -258,7 +275,7 @@
             </div>
           </div>
           <div class="process" data-mobile-zone="process">
-            <div>
+            <div class="process-flow">
               <div
                 id="process-steps"
                 class="process-steps"
@@ -283,27 +300,32 @@
           <div class="marka-heading">
             <div>
               <p class="status">v0 · Pre-launch</p>
-              <h2>Less generic AI.<br />More brand thinking.</h2>
+              <h2>
+                Less generic AI.<br /><strong class="hl"
+                  >More brand thinking.</strong
+                >
+              </h2>
               <p>
-                Exploring how business context and marketing frameworks can
-                guide better AI-assisted content.
+                Exploring how <strong>business context</strong> and
+                <strong>marketing frameworks</strong> guide better AI-assisted
+                content and planning.
               </p>
             </div>
-            <span class="marka-wordmark">Marka+</span>
+            <span class="marka-wordmark">Marka+ Lab</span>
           </div>
           <div
             class="focus-nav"
             data-focus-nav="marka"
-            aria-label="Marka panels"
+            aria-label="Marka+ Lab panels"
           >
             <button data-focus-value="concept">The concept</button
             ><button data-focus-value="example">Illustrative example</button>
           </div>
-          <ol class="pipeline" data-mobile-zone="concept">
-            <li>Business &amp;<br />brand context</li>
-            <li>Marketing<br />framework</li>
-            <li>AI-assisted<br />workflow</li>
-            <li>Contextual<br />content direction</li>
+          <ol class="pipeline" id="marka-pipeline" data-mobile-zone="concept">
+            <li>Business &amp; <br />brand context</li>
+            <li>Marketing <br />framework</li>
+            <li>AI Creative <br />Studio</li>
+            <li>AI Assisted Planning <br />Execution</li>
           </ol>
           <div class="marka-comparison" data-mobile-zone="example">
             <div class="comparison-header">
@@ -313,7 +335,7 @@
                 aria-label="Illustrative approach"
               ></div>
               <p class="micro">
-                Illustrative example · not an actual Marka+ output
+                Illustrative workflow · pre-launch Marka+ Lab v0
               </p>
             </div>
             <div class="comparison-panes">
@@ -322,7 +344,7 @@
                 <p id="example-input"></p>
               </div>
               <div>
-                <h3>Content direction</h3>
+                <h3>Output</h3>
                 <p id="example-output"></p>
                 <p id="example-caption" class="micro"></p>
               </div>

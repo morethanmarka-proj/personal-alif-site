@@ -9,7 +9,8 @@ import {
 import { swap } from "./motion.js";
 const $ = (id) => document.getElementById(id);
 const text = (id, value) => {
-  $(id).textContent = value;
+  const el = $(id);
+  if (el) el.textContent = value;
 };
 function buttonLabel(button, title, description) {
   const strong = document.createElement("strong");
@@ -24,6 +25,7 @@ function buttonLabel(button, title, description) {
 export function choices(container, items, onSelect, initial = 0) {
   container.replaceChildren();
   container.setAttribute("role", "group");
+  let currentIndex = initial;
   const buttons = items.map((item, index) => {
     const button = document.createElement("button");
     button.type = "button";
@@ -32,7 +34,7 @@ export function choices(container, items, onSelect, initial = 0) {
       typeof item === "string" ? item : item[0],
       typeof item === "string" ? "" : item[1],
     );
-    button.addEventListener("click", () => select(index));
+    button.addEventListener("click", () => select(index, true));
     button.addEventListener("keydown", (event) => {
       let next = index;
       if (["ArrowRight", "ArrowDown"].includes(event.key))
@@ -43,23 +45,36 @@ export function choices(container, items, onSelect, initial = 0) {
       else if (event.key === "End") next = items.length - 1;
       else return;
       event.preventDefault();
-      select(next);
+      select(next, true);
       buttons[next].focus();
     });
     container.append(button);
     return button;
   });
-  function select(index) {
+  function select(index, userTriggered = false) {
+    currentIndex = ((index % items.length) + items.length) % items.length;
     buttons.forEach((button, i) => {
-      button.setAttribute("aria-pressed", String(i === index));
-      button.tabIndex = i === index ? 0 : -1;
+      button.setAttribute("aria-pressed", String(i === currentIndex));
+      button.tabIndex = i === currentIndex ? 0 : -1;
     });
-    onSelect(index);
+    onSelect(currentIndex, userTriggered);
   }
-  select(initial);
+  select(initial, false);
+  select.next = () => select(currentIndex + 1, false);
+  select.current = () => currentIndex;
   return select;
 }
 export function setupPanels() {
+  let diagramIndex = 0;
+  let diagramNodes = [];
+  function highlightDiagram(idx) {
+    if (!diagramNodes.length) return;
+    diagramIndex = ((idx % diagramNodes.length) + diagramNodes.length) % diagramNodes.length;
+    diagramNodes.forEach((node, i) => {
+      node.setAttribute("aria-pressed", String(i === diagramIndex));
+    });
+  }
+
   choices(
     $("case-selector"),
     cases.map((entry) => [entry.brand, entry.emphasis]),
@@ -68,11 +83,13 @@ export function setupPanels() {
       text("case-title", entry.title);
       text("case-role", entry.role);
       text("case-caption", entry.brand);
+      text("case-summary", entry.summary);
       const diagram = $("case-diagram");
       diagram.replaceChildren();
       diagram.dataset.case = entry.id;
-      entry.diagram.forEach((label, i) => {
-        const node = document.createElement("div");
+      diagramNodes = entry.diagram.map((label, i) => {
+        const node = document.createElement("button");
+        node.type = "button";
         node.className = "diagram-node";
         const number = document.createElement("span");
         number.className = "diagram-number";
@@ -82,8 +99,11 @@ export function setupPanels() {
         const tag = document.createElement("small");
         tag.textContent = entry.tags[i];
         node.append(number, title, tag);
+        node.addEventListener("click", () => highlightDiagram(i));
         diagram.append(node);
+        return node;
       });
+      highlightDiagram(0);
       if (entry.outcome) {
         const result = document.createElement("p");
         result.className = "diagram-outcome";
@@ -97,7 +117,9 @@ export function setupPanels() {
       swap(diagram);
     },
   );
-  choices(
+
+  let stageTimer = 0;
+  const selectStage = choices(
     $("skill-stages"),
     stages.map((stage) => [stage.name, stage.summary]),
     (index) => {
@@ -114,14 +136,33 @@ export function setupPanels() {
           swap($("capability-note"));
         },
       );
+      clearInterval(stageTimer);
+      stageTimer = setInterval(() => {
+        if (document.body.dataset.panel === "skills") selectStage.next();
+      }, 3600);
     },
-    1,
+    0,
   );
-  choices($("proof-tabs"), Object.keys(proof), (index) => {
+
+  const proofKeys = Object.keys(proof);
+  let activeProofTab = 0;
+  let activeProofItem = 0;
+  let proofItems = [];
+  function highlightProofItem(idx) {
+    if (!proofItems.length) return;
+    activeProofItem = ((idx % proofItems.length) + proofItems.length) % proofItems.length;
+    proofItems.forEach((el, i) => {
+      el.setAttribute("aria-pressed", String(i === activeProofItem));
+    });
+  }
+  const selectProofTab = choices($("proof-tabs"), proofKeys, (index) => {
+    activeProofTab = index;
     const panel = $("proof-content");
     panel.replaceChildren();
-    for (const [heading, description] of Object.values(proof)[index]) {
-      const item = document.createElement("div");
+    proofItems = Object.values(proof)[index].map(([heading, description], i) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "proof-card";
       const title = document.createElement("strong");
       title.textContent = heading;
       item.append(title);
@@ -130,10 +171,14 @@ export function setupPanels() {
         detail.textContent = description;
         item.append(detail);
       }
+      item.addEventListener("click", () => highlightProofItem(i));
       panel.append(item);
-    }
+      return item;
+    });
+    highlightProofItem(0);
     swap(panel);
   });
+
   let activeService = services[0],
     selectedItem,
     activeDetail = "Scope",
@@ -197,11 +242,21 @@ export function setupPanels() {
     $("boundary-toggle").setAttribute("aria-expanded", "true");
     $("boundary-toggle").textContent = "Back to selected detail";
   });
-  choices(
+
+  let processTimer = 0;
+  const selectProcess = choices(
     $("process-steps"),
-    process.map((step, i) => String(i + 1).padStart(2, "0") + " " + step[0]),
-    (index) => text("process-note", process[index][1]),
+    process.map((step, i) => [String(i + 1).padStart(2, "0") + " " + step[0], "Step " + (i + 1)]),
+    (index) => {
+      text("process-note", process[index][1]);
+      swap($("process-note"));
+      clearInterval(processTimer);
+      processTimer = setInterval(() => {
+        if (document.body.dataset.panel === "services") selectProcess.next();
+      }, 2800);
+    },
   );
+
   choices(
     $("example-tabs"),
     examples.map((example) => example.name),
@@ -213,6 +268,44 @@ export function setupPanels() {
     },
     1,
   );
+
+  const pipelineItems = [...document.querySelectorAll("#marka-pipeline li")];
+  let pipelineIndex = 0;
+  function highlightPipeline(idx) {
+    if (!pipelineItems.length) return;
+    pipelineIndex = ((idx % pipelineItems.length) + pipelineItems.length) % pipelineItems.length;
+    pipelineItems.forEach((li, i) => {
+      li.setAttribute("data-active", String(i === pipelineIndex));
+    });
+  }
+  pipelineItems.forEach((li, i) => {
+    li.tabIndex = 0;
+    li.setAttribute("role", "button");
+    li.addEventListener("click", () => highlightPipeline(i));
+    li.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        highlightPipeline(i);
+      }
+    });
+  });
+  highlightPipeline(0);
+
+  setInterval(() => {
+    const panel = document.body.dataset.panel;
+    if (panel === "work") {
+      highlightDiagram(diagramIndex + 1);
+    } else if (panel === "skills") {
+      if (activeProofItem + 1 < proofItems.length) {
+        highlightProofItem(activeProofItem + 1);
+      } else {
+        selectProofTab((activeProofTab + 1) % proofKeys.length);
+      }
+    } else if (panel === "marka") {
+      highlightPipeline(pipelineIndex + 1);
+    }
+  }, 2400);
+
   document.querySelectorAll("[data-focus-nav]").forEach((nav) => {
     const view = nav.closest(".view"),
       buttons = [...nav.querySelectorAll("button")];

@@ -44,7 +44,7 @@ void main(){
 const TAB_COLORS = {
   profile: new THREE.Color(0x1b3bff),
   work: new THREE.Color(0xdc2626),
-  skills: new THREE.Color(0x7c3aed),
+  skills: new THREE.Color().setRGB(0.95, 0.42, 0.04, THREE.LinearSRGBColorSpace),
   services: new THREE.Color(0x10b981),
   marka: new THREE.Color(0xd4d4d8),
 };
