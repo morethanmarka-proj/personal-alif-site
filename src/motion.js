@@ -30,12 +30,18 @@ export function reveal(container, direction = 1) {
   if (heading) {
     if (!heading.dataset.split) {
       heading.dataset.split = "true";
-      heading.setAttribute("aria-label", heading.textContent);
-      const words = heading.textContent.trim().split(/\s+/);
+      heading.setAttribute("aria-label", heading.textContent.trim());
+      const tokens = [];
+      for (const node of heading.childNodes) {
+        const cls = node.nodeType === 1 ? node.className : "";
+        for (const word of (node.textContent || "").trim().split(/\s+/)) {
+          if (word) tokens.push({ word, cls });
+        }
+      }
       heading.replaceChildren();
-      for (const word of words) {
+      for (const { word, cls } of tokens) {
         const mask = document.createElement("span");
-        mask.className = "word-mask";
+        mask.className = cls ? "word-mask " + cls : "word-mask";
         mask.setAttribute("aria-hidden", "true");
         for (const character of word) {
           const span = document.createElement("span");

@@ -245,10 +245,13 @@ small,
 p {
   max-width: 52ch;
 }
+.serif,
 em.accent {
   font-family: Georgia, serif;
   font-style: italic;
   font-weight: 400;
+}
+em.accent {
   color: var(--accent);
 }
 .word-mask {
@@ -373,6 +376,16 @@ em.accent {
 .profile-view [data-intro-panel] {
   width: 58%;
   min-height: 140px;
+}
+.overview-lead {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(17px, 1.35vw, 22px);
+  line-height: 1.35;
+  color: var(--fg);
+  margin-bottom: 10px;
+  max-width: 48ch;
 }
 .profile-view .subnav {
   width: 58%;
