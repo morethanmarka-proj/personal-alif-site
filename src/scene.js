@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { createBlocks } from "./effects/blocks.js";
 import { createAscii } from "./effects/ascii.js";
 import { createGrid } from "./effects/grid.js";
-import { createSlats } from "./effects/slats.js";
 
 const styleForTab = {
   profile: "blocks",
@@ -13,8 +12,6 @@ const styleForTab = {
 };
 
 export function createScene(canvas) {
-  const button = document.getElementById("scene-toggle");
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({
@@ -26,7 +23,6 @@ export function createScene(canvas) {
   } catch {
     document.body.dataset.sceneFallback = "true";
     canvas.hidden = true;
-    button.hidden = true;
     return { setTab() {}, dispose() {} };
   }
   const state = {
@@ -49,7 +45,6 @@ export function createScene(canvas) {
     last = 0,
     idle = 0,
     down = false,
-    paused = reduced.matches,
     lost = false,
     disposed = false;
   function makeEffects() {
@@ -57,27 +52,14 @@ export function createScene(canvas) {
       blocks: createBlocks(),
       ascii: createAscii(),
       grid: createGrid(mobile),
-      slats: createSlats(mobile),
     };
-  }
-  function label() {
-    button.textContent = paused ? "Play effect" : "Pause effect";
-    button.setAttribute("aria-pressed", String(paused));
   }
   function draw(dt = 0) {
     current.update(state, dt);
     renderer.render(current.scene, current.camera);
-    if (state.tab === "profile") {
-      effects.slats.update(state, dt);
-      renderer.autoClear = false;
-      renderer.clearDepth();
-      renderer.render(effects.slats.scene, effects.slats.camera);
-      renderer.autoClear = true;
-    }
   }
   function loop(now) {
-    if (disposed || paused || lost || document.hidden || state.tab === "work")
-      return;
+    if (disposed || lost || state.tab === "work") return;
     const dt = Math.min((now - (last || now)) / 1000, 0.05);
     last = now;
     state.time += dt;
@@ -99,9 +81,9 @@ export function createScene(canvas) {
   function resume() {
     cancelAnimationFrame(frame);
     last = 0;
-    if (disposed || lost || document.hidden) return;
+    if (disposed || lost) return;
     draw();
-    if (!paused && state.tab !== "work") frame = requestAnimationFrame(loop);
+    if (state.tab !== "work") frame = requestAnimationFrame(loop);
   }
   function resize() {
     width = innerWidth;
@@ -121,18 +103,15 @@ export function createScene(canvas) {
     resume();
   }
   function track(event) {
-    if (paused) return;
     target.set(event.clientX / width, 1 - event.clientY / height);
     idle = 0;
   }
   function press(event) {
-    if (paused || event.target.closest("button,a,input,select,textarea"))
-      return;
+    if (event.target.closest("button,a,input,select,textarea")) return;
     track(event);
     state.p.copy(target);
     down = true;
     current.tap(state);
-    if (state.tab === "profile") effects.slats.tap(state);
   }
   function release() {
     down = false;
@@ -143,58 +122,33 @@ export function createScene(canvas) {
     state.velocity.set(0, 0);
     Object.values(effects).forEach((effect) => effect.reset());
   }
-  function preference() {
-    paused = reduced.matches;
-    state.amp = reduced.matches ? 0.3 : 1;
-    resetMotion();
-    label();
-    resume();
-  }
-  function toggle() {
-    paused = !paused;
-    resetMotion();
-    label();
-    resume();
-  }
-  function visibility() {
-    release();
-    resume();
-  }
   function contextLost(event) {
     event.preventDefault();
     lost = true;
     cancelAnimationFrame(frame);
     canvas.hidden = true;
-    button.hidden = true;
     document.body.dataset.sceneFallback = "true";
   }
   function contextRestored() {
     lost = false;
     canvas.hidden = false;
-    button.hidden = false;
     delete document.body.dataset.sceneFallback;
     resize();
   }
-  window.addEventListener("resize", resize);
+  window.addEventListener("resize", resize, { passive: true });
   window.addEventListener("pointermove", track, { passive: true });
   window.addEventListener("pointerdown", press, { passive: true });
-  window.addEventListener("pointerup", release);
-  window.addEventListener("pointercancel", release);
-  window.addEventListener("blur", release);
-  document.addEventListener("visibilitychange", visibility);
-  reduced.addEventListener("change", preference);
+  window.addEventListener("pointerup", release, { passive: true });
+  window.addEventListener("pointercancel", release, { passive: true });
+  window.addEventListener("blur", release, { passive: true });
   canvas.addEventListener("webglcontextlost", contextLost);
   canvas.addEventListener("webglcontextrestored", contextRestored);
-  button.addEventListener("click", toggle);
-  state.amp = reduced.matches ? 0.3 : 1;
-  label();
   resize();
   return {
     setTab(name) {
       state.tab = styleForTab[name] ? name : "profile";
       current = effects[styleForTab[state.tab]];
       canvas.dataset.effect = styleForTab[state.tab];
-      button.hidden = state.tab === "work" || lost;
       resetMotion();
       current.resize(width, height, renderer.getPixelRatio());
       resume();
@@ -208,11 +162,8 @@ export function createScene(canvas) {
       window.removeEventListener("pointerup", release);
       window.removeEventListener("pointercancel", release);
       window.removeEventListener("blur", release);
-      document.removeEventListener("visibilitychange", visibility);
-      reduced.removeEventListener("change", preference);
       canvas.removeEventListener("webglcontextlost", contextLost);
       canvas.removeEventListener("webglcontextrestored", contextRestored);
-      button.removeEventListener("click", toggle);
       Object.values(effects).forEach((effect) => effect.dispose());
       renderer.dispose();
     },

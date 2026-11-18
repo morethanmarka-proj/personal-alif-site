@@ -26,7 +26,7 @@
           class="home-key"
           data-view="profile"
           aria-label="Alif Fairuz home"
-          aria-pressed="true"
+          aria-current="page"
         >
           AF
         </button>
@@ -71,13 +71,10 @@
             aria-pressed="false"
             aria-label="More Than Marka"
           >
-            <span>More Than Marka 🔒</span
-            ><small aria-hidden="true">Marka 🔒</small>
+            <span>More Than Marka</span
+            ><small aria-hidden="true">Marka</small>
           </button>
         </nav>
-        <button type="button" id="scene-toggle" aria-pressed="false">
-          Pause effect
-        </button>
       </header>
       <main>
         <section
@@ -111,7 +108,14 @@
               </div>
             </div>
             <div class="art">
-              <img src="assets/portrait.webp" alt="Portrait of Alif Fairuz" />
+              <img
+                src="assets/portrait.webp"
+                alt="Portrait of Alif Fairuz"
+                width="419"
+                height="747"
+                fetchpriority="high"
+                decoding="async"
+              />
             </div>
           </div>
           <div class="subnav" aria-label="Explore Alif’s profile">
@@ -130,27 +134,14 @@
               I start with the business goal and the audience, then decide where
               media can make a difference. I bring hands-on experience across
               digital campaign planning, execution, and measurement, from
-              Indonesian small businesses to regional platforms. Analytics
-              guides where I invest. I use AI where it can improve how marketing
-              teams work.
+              Indonesian small businesses to regional platforms. I use analytics
+              to decide where to invest, and I apply AI where it improves how
+              marketing teams work.
             </p>
-            <div class="marks" aria-label="Selected experience">
-              <span class="mark"><strong>Indonesian MSMEs</strong></span>
-              <span class="mark"
-                ><img src="assets/moveit.webp" alt="MoveIt Philippines"
-              /></span>
-              <span class="mark"
-                ><img src="assets/traveloka.webp" alt="Traveloka Malaysia"
-              /></span>
-              <span class="mark"
-                ><img src="assets/grab.webp" alt="Grab Philippines"
-              /></span>
-            </div>
           </div>
           <div data-intro-panel="approach" hidden>
             <ul class="visual-grid profile-evidence">
               <li>
-                <span class="visual-symbol" aria-hidden="true">◎</span>
                 <div>
                   <strong>Start with the business</strong
                   ><small
@@ -160,7 +151,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▷</span>
                 <div>
                   <strong>Build for the market</strong
                   ><small
@@ -170,7 +160,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▥</span>
                 <div>
                   <strong>Measure what changed</strong
                   ><small
@@ -180,7 +169,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">✦</span>
                 <div>
                   <strong>Apply AI to real work</strong
                   ><small
@@ -197,22 +185,37 @@
                 <span class="proof-stat">−18%</span>
                 <div>
                   <strong>MoveIt PH</strong
-                  ><small>Lower cost per acquisition (CPA).</small>
+                  ><small
+                    >Lower cost per acquisition (CPA) · M+C Saatchi campaign
+                    report</small
+                  >
                 </div>
               </li>
               <li>
                 <span class="proof-stat">+7%</span>
                 <div>
                   <strong>Traveloka Malaysia</strong
-                  ><small>Marketing profitability quarter over quarter.</small>
+                  ><small
+                    >Marketing profitability quarter over quarter · Traveloka
+                    internal report, H2 2024</small
+                  >
                 </div>
               </li>
               <li>
-                <img class="proof-image" src="assets/summer.webp" alt="" />
+                <img
+                  class="proof-image"
+                  src="assets/summer.webp"
+                  alt=""
+                  width="561"
+                  height="258"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div>
                   <strong>2024 Cannes Silver Lion</strong
                   ><small
-                    >Grab PH and GIGIL · No Sweat Summer · Viral Film</small
+                    >Grab PH and GIGIL · No Sweat Summer · Viral Film winner,
+                    Cannes Lions 2024</small
                   >
                 </div>
               </li>
@@ -231,7 +234,7 @@
               </li>
             </ul>
           </div>
-          <div class="marquee-pair">
+          <footer class="marquee-pair" aria-label="Selected expertise and markets">
             <div class="text-marquee" aria-label="Expertise">
               <div class="marquee-track">
                 <div class="marquee-group">
@@ -262,10 +265,7 @@
                 </div>
               </div>
             </div>
-            <button type="button" id="marquee-toggle" aria-pressed="false">
-              Pause text
-            </button>
-          </div>
+          </footer>
         </section>
         <section class="view" data-screen="work" hidden>
           <div class="work-heading">
@@ -377,7 +377,6 @@
           <div data-skill-panel="expertise">
             <ul class="visual-grid">
               <li>
-                <span class="visual-symbol" aria-hidden="true">◎</span>
                 <div>
                   <strong>Marketing strategy &amp; performance media</strong
                   ><small
@@ -387,7 +386,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▥</span>
                 <div>
                   <strong>Analytics &amp; measurement</strong
                   ><small
@@ -397,7 +395,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">◇</span>
                 <div>
                   <strong>Client partnerships</strong
                   ><small
@@ -407,7 +404,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">✦</span>
                 <div>
                   <strong>AI workflow adoption</strong
                   ><small
@@ -421,17 +417,45 @@
           <div data-skill-panel="tools" hidden>
             <div class="marks">
               <span class="mark"
-                ><img src="assets/google.webp" alt="Google Ads" /></span
+                ><img
+                  src="assets/google.webp"
+                  alt="Google Ads"
+                  width="640"
+                  height="211"
+                  loading="lazy"
+                  decoding="async" /></span
               ><span class="mark"
-                ><img src="assets/meta.webp" alt="Meta" /></span
+                ><img
+                  src="assets/meta.webp"
+                  alt="Meta"
+                  width="640"
+                  height="136"
+                  loading="lazy"
+                  decoding="async" /></span
               ><span class="mark"
-                ><img src="assets/tiktok.webp" alt="TikTok" /></span
+                ><img
+                  src="assets/tiktok.webp"
+                  alt="TikTok"
+                  width="640"
+                  height="188"
+                  loading="lazy"
+                  decoding="async" /></span
               ><span class="mark"
                 ><img
                   src="assets/analytics.webp"
-                  alt="Google Analytics" /></span
+                  alt="Google Analytics"
+                  width="640"
+                  height="196"
+                  loading="lazy"
+                  decoding="async" /></span
               ><span class="mark"
-                ><img src="assets/powerbi.webp" alt="Power BI"
+                ><img
+                  src="assets/powerbi.webp"
+                  alt="Power BI"
+                  width="640"
+                  height="182"
+                  loading="lazy"
+                  decoding="async"
               /></span>
             </div>
             <p>Google Marketing Platform · Tableau · Python · R</p>
@@ -439,24 +463,52 @@
           <div data-skill-panel="credentials" hidden>
             <ul class="visual-grid certifications">
               <li>
-                <img src="assets/cert-google.webp" alt="" />
+                <img
+                  src="assets/cert-google.webp"
+                  alt=""
+                  width="240"
+                  height="240"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div><strong>Google</strong><small>Search Ads</small></div>
               </li>
               <li>
-                <img src="assets/cert-meta.webp" alt="" />
+                <img
+                  src="assets/cert-meta.webp"
+                  alt=""
+                  width="240"
+                  height="240"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div>
                   <strong>Meta</strong><small>Media Buying Professional</small>
                 </div>
               </li>
               <li>
-                <img src="assets/cert-planning.webp" alt="" />
+                <img
+                  src="assets/cert-planning.webp"
+                  alt=""
+                  width="240"
+                  height="240"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div>
                   <strong>Meta</strong
                   ><small>Media Planning Professional</small>
                 </div>
               </li>
               <li>
-                <img src="assets/cert-tiktok.webp" alt="" />
+                <img
+                  src="assets/cert-tiktok.webp"
+                  alt=""
+                  width="240"
+                  height="240"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div>
                   <strong>TikTok</strong
                   ><small>Media Buying Professional</small>
@@ -467,7 +519,6 @@
           <div data-skill-panel="education" hidden>
             <ul class="visual-grid">
               <li>
-                <span class="visual-symbol" aria-hidden="true">NUS</span>
                 <div>
                   <strong>MSc in Management</strong
                   ><small
@@ -477,14 +528,12 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">ITB</span>
                 <div>
                   <strong>Bachelor of Management</strong
                   ><small>Institut Teknologi Bandung · 3.43 / 4.00</small>
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▥</span>
                 <div>
                   <strong>Business analytics</strong
                   ><small
@@ -494,7 +543,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">✦</span>
                 <div>
                   <strong>AI in marketing</strong
                   ><small
@@ -523,7 +571,6 @@
             </p>
             <ul class="visual-grid">
               <li>
-                <span class="visual-symbol" aria-hidden="true">◎</span>
                 <div>
                   <strong>Media plan</strong
                   ><small
@@ -532,17 +579,15 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▷</span>
                 <div>
                   <strong>Campaign launch</strong
                   ><small
-                    >Setup and quality checks across the agreed
+                    >Set up campaigns and run quality checks across the agreed
                     platforms.</small
                   >
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">↘</span>
                 <div>
                   <strong>Ongoing optimization</strong
                   ><small
@@ -552,7 +597,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▥</span>
                 <div>
                   <strong>Performance reporting</strong
                   ><small
@@ -570,7 +614,6 @@
             </p>
             <ul class="visual-grid">
               <li>
-                <span class="visual-symbol" aria-hidden="true">◎</span>
                 <div>
                   <strong>Account review</strong
                   ><small
@@ -580,17 +623,15 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▥</span>
                 <div>
                   <strong>Measurement review</strong
                   ><small
-                    >Check conversion signals and report where tracking can be
-                    improved.</small
+                    >Check conversion signals and show where your team can
+                    improve tracking.</small
                   >
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">↗</span>
                 <div>
                   <strong>Growth plan</strong
                   ><small
@@ -608,7 +649,6 @@
             </p>
             <ul class="visual-grid">
               <li>
-                <span class="visual-symbol" aria-hidden="true">◎</span>
                 <div>
                   <strong>Workflow review</strong
                   ><small
@@ -617,7 +657,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">▷</span>
                 <div>
                   <strong>Pilot</strong
                   ><small
@@ -627,7 +666,6 @@
                 </div>
               </li>
               <li>
-                <span class="visual-symbol" aria-hidden="true">◇</span>
                 <div>
                   <strong>Team handover</strong
                   ><small
@@ -647,10 +685,24 @@
           </div>
         </section>
         <section class="view" data-screen="marka" hidden>
-          <span aria-hidden="true">🔒</span>
+          <svg
+            class="lock-icon"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <rect x="4" y="11" width="16" height="10" />
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+          </svg>
           <h2>More Than Marka</h2>
-          <div class="loader" aria-hidden="true"></div>
-          <p>morethanmarka.com · In development</p>
+          <div class="marka-rule" aria-hidden="true"></div>
+          <p class="status">
+            morethanmarka.com · Independent strategy practice in development
+          </p>
         </section>
       </main>
     </div>

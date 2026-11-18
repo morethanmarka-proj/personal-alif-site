@@ -94,6 +94,7 @@ export function createBlocks() {
             : 0;
         bar.scale.y =
           morphs[dark ? 4 : 0](i, j, state.time * 0.4) + proximity * 2.4 + wave;
+        bar.visible = bar.scale.y >= 0.15;
         material.color
           .set(dark ? 0x000000 : 0xffffff)
           .lerp(accent, Math.min(1, proximity * 1.4));

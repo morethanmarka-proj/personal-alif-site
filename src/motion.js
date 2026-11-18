@@ -1,7 +1,6 @@
 export const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
 export function reveal(container, direction = 1) {
-  if (reducedMotion.matches) return;
   container.animate(
     [
       { opacity: 0, transform: "translateX(" + direction * 40 + "px)" },
@@ -60,21 +59,20 @@ export function reveal(container, direction = 1) {
   }
 }
 export function swap(container) {
-  if (!reducedMotion.matches)
-    container.animate(
-      [
-        { opacity: 0, transform: "translateY(18px)" },
-        { opacity: 1, transform: "translateY(0)" },
-      ],
-      { duration: 600, easing: "cubic-bezier(.2,.7,.2,1)" },
-    );
+  container.animate(
+    [
+      { opacity: 0, transform: "translateY(18px)" },
+      { opacity: 1, transform: "translateY(0)" },
+    ],
+    { duration: 600, easing: "cubic-bezier(.2,.7,.2,1)" },
+  );
   container
     .querySelectorAll(".result strong,.proof-stat")
     .forEach((element) => {
       const label = element.dataset.value || element.textContent;
       element.dataset.value = label;
       const value = Number(label.replace(/[^0-9.]/g, ""));
-      if (!value || reducedMotion.matches) {
+      if (!value) {
         element.textContent = label;
         return;
       }
@@ -83,7 +81,7 @@ export function swap(container) {
       element.dataset.generation = generation;
       function tick(now) {
         if (element.dataset.generation !== generation) return;
-        if (reducedMotion.matches || element.closest("[hidden]")) {
+        if (element.closest("[hidden]")) {
           element.textContent = label;
           return;
         }
@@ -100,7 +98,7 @@ export function swap(container) {
 export function magneticButtons() {
   document.querySelectorAll(".actions a").forEach((button) => {
     button.addEventListener("pointermove", (event) => {
-      if (reducedMotion.matches || event.pointerType !== "mouse") return;
+      if (event.pointerType !== "mouse") return;
       const rect = button.getBoundingClientRect();
       button.style.translate =
         (event.clientX - rect.left - rect.width / 2) * 0.2 +

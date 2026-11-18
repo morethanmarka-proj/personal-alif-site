@@ -63,6 +63,17 @@ body[data-tone="dark"] {
 [hidden] {
   display: none !important;
 }
+a[href],
+button,
+[role="button"],
+[role="tab"] {
+  cursor: pointer;
+}
+:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -80,6 +91,9 @@ a {
 }
 a:hover {
   color: var(--accent);
+}
+a:active {
+  opacity: 0.75;
 }
 button:focus-visible,
 a:focus-visible {
@@ -117,9 +131,25 @@ header {
 .home-key {
   flex: none;
   border: 1px solid var(--fg);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   font-weight: 600;
+  transition:
+    background 180ms,
+    color 180ms,
+    border-color 180ms,
+    transform 120ms;
+}
+.home-key:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.home-key:active {
+  background: var(--fg);
+  color: var(--bg);
+  transform: translateY(1px);
 }
 nav {
   position: relative;
@@ -136,13 +166,19 @@ nav button {
   white-space: nowrap;
   color: var(--mu);
   font-size: 13px;
-  padding: 0;
+  padding: 0 6px;
+  min-height: 44px;
+  min-width: 44px;
   flex: none;
   scroll-snap-align: start;
+  transition: color 180ms;
 }
 nav button[aria-selected="true"],
 nav button:hover {
   color: var(--fg);
+}
+nav button:active {
+  color: var(--accent);
 }
 nav small {
   display: none;
@@ -253,6 +289,13 @@ em.accent {
   color: var(--white);
   border-color: var(--accent);
 }
+.actions .secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.actions a:active {
+  transform: translateY(1px);
+}
 .subnav {
   display: flex;
   gap: 8px;
@@ -260,12 +303,20 @@ em.accent {
 }
 .subnav button,
 [data-project] {
-  min-height: 40px;
-  padding: 8px 14px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 14px;
   border: 1px solid var(--fg);
   font-size: 12px;
+  transition:
+    background 180ms,
+    color 180ms,
+    border-color 180ms,
+    transform 120ms;
 }
+.subnav button[aria-selected="true"],
 .subnav button[aria-pressed="true"],
+[data-project][aria-selected="true"],
 [data-project][aria-pressed="true"] {
   background: var(--fg);
   color: var(--bg);
@@ -273,9 +324,21 @@ em.accent {
 .subnav button:hover,
 [data-project]:hover {
   border-color: var(--accent);
+  color: var(--accent);
+}
+.subnav button[aria-selected="true"]:hover,
+.subnav button[aria-pressed="true"]:hover,
+[data-project][aria-selected="true"]:hover,
+[data-project][aria-pressed="true"]:hover {
+  color: var(--bg);
+  background: var(--accent);
+}
+.subnav button:active,
+[data-project]:active {
+  transform: translateY(1px);
 }
 .profile-view {
-  padding-bottom: 72px;
+  padding-bottom: 32px;
   gap: 16px;
 }
 .profile-hero {
@@ -338,9 +401,6 @@ em.accent {
 .visual-grid small {
   margin-top: 6px;
 }
-.visual-symbol {
-  display: none;
-}
 .proof-stat {
   font-size: clamp(24px, 3vw, 48px);
   line-height: 1;
@@ -359,6 +419,13 @@ em.accent {
 }
 .profile-evidence strong {
   font-size: 13px;
+}
+.profile-evidence a,
+.video-controls a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
 }
 .profile-evidence small {
   font-size: 11px;
@@ -381,20 +448,6 @@ em.accent {
   object-fit: contain;
   filter: grayscale(1);
 }
-.profile-view .marks {
-  display: none;
-}
-.marquee {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 48px;
-  border-top: 1px solid var(--fg);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
 .marquee-track {
   display: flex;
   width: max-content;
@@ -406,16 +459,6 @@ em.accent {
   gap: 48px;
   flex-shrink: 0;
   padding-right: 48px;
-}
-.marquee img {
-  width: 85px;
-  height: 26px;
-  object-fit: contain;
-  filter: grayscale(1);
-}
-.marquee span {
-  white-space: nowrap;
-  font-size: 13px;
 }
 @keyframes marquee {
   to {
@@ -441,7 +484,16 @@ em.accent {
   text-align: left;
   min-height: 60px;
   padding: 12px 8px;
-  transition: padding 200ms;
+  transition:
+    padding 200ms,
+    color 180ms,
+    background 180ms;
+}
+.timeline button:hover {
+  color: var(--accent);
+}
+.timeline button:active {
+  opacity: 0.8;
 }
 .timeline strong,
 .timeline small {
@@ -453,6 +505,7 @@ em.accent {
 .timeline small {
   margin-top: 4px;
 }
+.timeline button[aria-selected="true"],
 .timeline button[aria-pressed="true"] {
   box-shadow: inset 3px 0 var(--accent);
   padding-left: 16px;
@@ -527,28 +580,13 @@ em.accent {
   font-size: clamp(48px, 9vw, 150px);
   max-width: 10ch;
 }
-.loader {
+.lock-icon {
+  color: var(--mu);
+}
+.marka-rule {
   width: 180px;
   height: 1px;
   background: var(--fg);
-  position: relative;
-  overflow: hidden;
-}
-.loader::after {
-  content: "";
-  position: absolute;
-  inset: -1px auto -1px 0;
-  width: 40px;
-  background: var(--accent);
-  animation: loading 2.2s linear infinite;
-}
-@keyframes loading {
-  from {
-    transform: translateX(-40px);
-  }
-  to {
-    transform: translateX(180px);
-  }
 }
 @media (max-width: 767px) {
   :root {
@@ -613,14 +651,18 @@ em.accent {
     font-size: 14px;
   }
   .actions a {
-    padding: 8px 10px;
+    padding: 10px 12px;
+    min-height: 44px;
+    min-width: 44px;
     font-size: 11px;
   }
   .subnav {
-    gap: 4px;
+    gap: 6px;
   }
   .subnav button {
-    padding: 7px 9px;
+    padding: 10px 12px;
+    min-height: 44px;
+    min-width: 44px;
     font-size: 11px;
   }
   .visual-grid {
@@ -657,6 +699,7 @@ em.accent {
   }
   .timeline {
     display: flex;
+    gap: 8px;
     overflow: auto;
     scroll-snap-type: x mandatory;
     border-bottom: 1px solid var(--fg);
@@ -675,6 +718,7 @@ em.accent {
   .timeline small {
     display: none;
   }
+  .timeline button[aria-selected="true"],
   .timeline button[aria-pressed="true"] {
     box-shadow: inset 0 -2px var(--accent);
     padding-left: 8px;
@@ -716,7 +760,7 @@ em.accent {
   }
 }
 @media (max-height: 640px) {
-  .marquee {
+  .marquee-pair {
     display: none;
   }
   .view,
@@ -831,15 +875,6 @@ em.accent {
     font-size: 56px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
 @media (max-height: 480px) and (min-width: 768px) {
   :root {
     --bar: 52px;
@@ -876,7 +911,7 @@ em.accent {
     gap: 24px;
   }
   .timeline button {
-    min-height: 40px;
+    min-height: 44px;
     padding-block: 5px;
   }
   .timeline small {
@@ -899,18 +934,12 @@ em.accent {
   margin-right: 0;
 }
 
-/* The two rows identify expertise and markets; controls keep continuous motion optional. */
-.profile-view {
-  padding-bottom: 126px;
-}
 .marquee-pair {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-bottom: 28px;
+  margin-top: auto;
+  margin-inline: calc(-1 * var(--m));
   overflow: hidden;
   background: var(--bg);
+  flex: none;
 }
 .text-marquee {
   height: 36px;
@@ -932,17 +961,6 @@ em.accent {
   animation-direction: reverse;
   animation-duration: 46s;
 }
-.marquee-pair.is-paused .marquee-track {
-  animation-play-state: paused;
-}
-#marquee-toggle {
-  position: absolute;
-  right: 16px;
-  bottom: 0;
-  height: 28px;
-  font-size: 11px;
-  text-decoration: underline;
-}
 .text-marquee span {
   white-space: nowrap;
   font-size: 13px;
@@ -962,12 +980,13 @@ em.accent {
 }
 #video-toggle {
   min-height: 44px;
+  min-width: 44px;
   padding: 8px 12px;
   border: 1px solid var(--fg);
 }
-#video-toggle:hover,
-#marquee-toggle:hover {
+#video-toggle:hover {
   color: var(--accent);
+  border-color: var(--accent);
 }
 .video-status {
   min-height: 16px;
@@ -1031,20 +1050,6 @@ body[data-panel="services"] {
 body[data-panel="marka"] #media-scene {
   opacity: 0.2;
 }
-#scene-toggle {
-  flex: none;
-  align-self: center;
-  min-height: 44px;
-  padding: 0 12px;
-  margin-left: auto;
-  font-size: 12px;
-  border-left: 1px solid var(--fg);
-}
-#scene-toggle:hover,
-#scene-toggle:active {
-  background: var(--fg);
-  color: var(--bg);
-}
 body[data-scene-fallback="true"]::before {
   content: "";
   position: fixed;
@@ -1066,12 +1071,6 @@ body[data-scene-fallback="true"][data-panel="work"]::before {
   display: none;
 }
 @media (max-width: 767px) {
-  #scene-toggle {
-    width: 66px;
-    padding: 0 6px;
-    font-size: 11px;
-    line-height: 1.2;
-  }
   body[data-panel="profile"] #media-scene {
     opacity: 0.18;
   }
@@ -1109,9 +1108,6 @@ body[data-scene-fallback="true"][data-panel="work"]::before {
   min-height: 230px;
 }
 @media (max-width: 767px) {
-  .profile-view {
-    padding-bottom: 116px;
-  }
   .text-marquee span {
     font-size: 12px;
   }
@@ -1145,7 +1141,8 @@ body[data-scene-fallback="true"][data-panel="work"]::before {
   }
   .work-detail .subnav button {
     min-height: 44px;
-    padding: 7px;
+    min-width: 44px;
+    padding: 7px 10px;
     font-size: 11px;
   }
   .work-explanation > div {
@@ -1165,9 +1162,6 @@ body[data-scene-fallback="true"][data-panel="work"]::before {
   }
 }
 @media (max-height: 640px) {
-  .profile-view {
-    padding-bottom: 108px;
-  }
   .work-explanation > div {
     padding: 8px 0;
     gap: 12px;
@@ -1205,44 +1199,10 @@ body[data-scene-fallback="true"][data-panel="work"]::before {
   .work-explanation dd {
     font-size: 11px;
   }
-  .profile-view {
-    padding-bottom: 100px;
-  }
   .profile-view .profile-evidence {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .profile-hero .home-title {
     font-size: 54px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-pair:not(.is-paused) .marquee-track {
-    animation: marquee 38s linear infinite !important;
-  }
-  .marquee-pair.is-paused .marquee-track {
-    animation: none !important;
-  }
-  .marquee-pair .text-marquee:nth-child(2) .marquee-track {
-    animation-direction: reverse !important;
-  }
-}
-.marquee-pair {
-  padding-bottom: 0;
-  padding-right: 88px;
-}
-#marquee-toggle {
-  inset: 0 0 0 auto;
-  width: 88px;
-  height: 72px;
-  background: var(--bg);
-  border-left: 1px solid var(--fg);
-  border-top: 1px solid var(--fg);
-}
-.profile-view {
-  padding-bottom: 100px;
-}
-@media (max-height: 480px) and (min-width: 768px) {
-  .profile-view {
-    padding-bottom: 84px;
   }
 }

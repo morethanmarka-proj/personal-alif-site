@@ -2,9 +2,10 @@ import "./styles.css";
 import { tabs } from "./poses.js";
 import { createScene } from "./scene.js";
 import { setupWork } from "./work.js";
-import { reveal, swap, magneticButtons, reducedMotion } from "./motion.js";
+import { reveal, swap, magneticButtons } from "./motion.js";
 
 const root = document.getElementById("alif-stage");
+const homeKey = root.querySelector(".home-key");
 const primary = [...root.querySelectorAll("nav [data-view]")];
 const panels = [...root.querySelectorAll("[data-screen]")];
 const scene = createScene(document.getElementById("media-scene"));
@@ -30,6 +31,7 @@ function navigate(name, updateHash = true) {
   const outgoing = panels.find((panel) => panel.dataset.screen === previous);
   document.body.dataset.panel = name;
   document.body.dataset.tone = name === "marka" ? "dark" : "light";
+  homeKey.setAttribute("aria-current", name === "profile" ? "page" : "false");
   primary.forEach((button) => {
     const active = button.dataset.view === name;
     button.setAttribute("aria-selected", active);
@@ -44,7 +46,7 @@ function navigate(name, updateHash = true) {
     .scrollIntoView({
       block: "nearest",
       inline: "nearest",
-      behavior: reducedMotion.matches ? "instant" : "smooth",
+      behavior: "smooth",
     });
   const show = () => {
     if (generation !== transition) return;
@@ -54,7 +56,7 @@ function navigate(name, updateHash = true) {
     reveal(next, direction);
     swap(next);
   };
-  if (outgoing !== next && !reducedMotion.matches) {
+  if (outgoing !== next) {
     outgoing
       .animate(
         [
@@ -91,9 +93,7 @@ primary.forEach((button) => {
     primary[index].focus();
   });
 });
-root
-  .querySelector(".home-key")
-  .addEventListener("click", () => navigate("profile"));
+homeKey.addEventListener("click", () => navigate("profile"));
 for (const [control, panel] of [
   ["intro", "intro-panel"],
   ["skill", "skill-panel"],
@@ -101,44 +101,62 @@ for (const [control, panel] of [
 ]) {
   const buttons = [...root.querySelectorAll("[data-" + control + "]")];
   const children = [...root.querySelectorAll("[data-" + panel + "]")];
-  buttons.forEach((button) =>
-    button.addEventListener("click", () => {
-      const value = button.getAttribute("data-" + control);
-      buttons.forEach((item) =>
-        item.setAttribute("aria-pressed", item === button),
-      );
-      children.forEach((child) => {
-        child.hidden = child.getAttribute("data-" + panel) !== value;
-        if (!child.hidden) swap(child);
-      });
-    }),
-  );
+  const list = buttons[0]?.closest(".subnav");
+  if (list) list.setAttribute("role", "tablist");
+  const selectSubTab = (targetButton) => {
+    const value = targetButton.getAttribute("data-" + control);
+    buttons.forEach((item) => {
+      const active = item === targetButton;
+      item.setAttribute("aria-selected", active);
+      item.tabIndex = active ? 0 : -1;
+    });
+    children.forEach((child) => {
+      child.hidden = child.getAttribute("data-" + panel) !== value;
+      if (!child.hidden) swap(child);
+    });
+  };
+  buttons.forEach((button, idx) => {
+    const value = button.getAttribute("data-" + control);
+    const active = button.getAttribute("aria-pressed") === "true" || idx === 0;
+    const tabId = "subtab-" + control + "-" + value;
+    const panelId = "subpanel-" + panel + "-" + value;
+    button.id = tabId;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", panelId);
+    button.setAttribute("aria-selected", active);
+    button.removeAttribute("aria-pressed");
+    button.tabIndex = active ? 0 : -1;
+    const matchingPanel = children.find(
+      (child) => child.getAttribute("data-" + panel) === value,
+    );
+    if (matchingPanel) {
+      matchingPanel.id = panelId;
+      matchingPanel.setAttribute("role", "tabpanel");
+      matchingPanel.setAttribute("aria-labelledby", tabId);
+    }
+    button.addEventListener("click", () => selectSubTab(button));
+    button.addEventListener("keydown", (event) => {
+      let nextIdx = buttons.indexOf(button);
+      if (event.key === "ArrowRight" || event.key === "ArrowDown")
+        nextIdx = (nextIdx + 1) % buttons.length;
+      else if (event.key === "ArrowLeft" || event.key === "ArrowUp")
+        nextIdx = (nextIdx - 1 + buttons.length) % buttons.length;
+      else if (event.key === "Home") nextIdx = 0;
+      else if (event.key === "End") nextIdx = buttons.length - 1;
+      else return;
+      event.preventDefault();
+      selectSubTab(buttons[nextIdx]);
+      buttons[nextIdx].focus();
+    });
+  });
 }
 const fromHash = () => navigate(location.hash.slice(1), false);
 window.addEventListener("hashchange", fromHash);
 window.addEventListener("popstate", fromHash);
-window.addEventListener("resize", positionIndicator);
+window.addEventListener("resize", positionIndicator, { passive: true });
 document.fonts.ready.then(positionIndicator);
 magneticButtons();
 navigate(location.hash.slice(1) || "profile");
-const marqueeButton = document.getElementById("marquee-toggle");
-let textPaused = reducedMotion.matches;
-function updateMarquee() {
-  document
-    .querySelector(".marquee-pair")
-    .classList.toggle("is-paused", textPaused);
-  marqueeButton.textContent = textPaused ? "Play text" : "Pause text";
-  marqueeButton.setAttribute("aria-pressed", String(textPaused));
-}
-marqueeButton.addEventListener("click", () => {
-  textPaused = !textPaused;
-  updateMarquee();
-});
-reducedMotion.addEventListener("change", () => {
-  textPaused = reducedMotion.matches;
-  updateMarquee();
-});
-updateMarquee();
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
     scene.dispose();

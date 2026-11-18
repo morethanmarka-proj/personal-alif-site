@@ -18,11 +18,11 @@ export const poses = {
 export const morphs = [
   (i, j, t) =>
     1.8 + Math.sin(i * 0.6 + t) * 0.65 + Math.cos(j * 0.6 - t * 0.8) * 0.65,
-  (i, j) => 0.3 + i * 0.38 + (j % 2) * 0.25,
+  (i, j) => 0.8 + i * 0.38 + (j % 2) * 0.25,
   (i, j) => {
     const distance = Math.hypot(i - 4, j - 4);
-    return distance > 2 && distance < 3.7 ? 2.8 : 0.25;
+    return distance > 2 && distance < 3.7 ? 2.8 : 0;
   },
-  (i, j) => (i % 3 === 1 && j % 3 === 1 ? 3.5 : 0.3),
-  (i, j) => (i === 4 && j === 4 ? 0.7 : 0.1),
+  (i, j) => (i % 3 === 1 && j % 3 === 1 ? 3.5 : 0),
+  (i, j) => (i === 4 && j === 4 ? 0.7 : 0),
 ];
