@@ -5,7 +5,6 @@ import { setupWork } from "./work.js";
 import { reveal, swap, magneticButtons } from "./motion.js";
 
 const root = document.getElementById("alif-stage");
-const homeKey = root.querySelector(".home-key");
 const primary = [...root.querySelectorAll("nav [data-view]")];
 const panels = [...root.querySelectorAll("[data-screen]")];
 const scene = createScene(document.getElementById("media-scene"));
@@ -31,7 +30,6 @@ function navigate(name, updateHash = true) {
   const outgoing = panels.find((panel) => panel.dataset.screen === previous);
   document.body.dataset.panel = name;
   document.body.dataset.tone = name === "marka" ? "dark" : "light";
-  homeKey.setAttribute("aria-current", name === "profile" ? "page" : "false");
   primary.forEach((button) => {
     const active = button.dataset.view === name;
     button.setAttribute("aria-selected", active);
@@ -92,7 +90,6 @@ primary.forEach((button) => {
     primary[index].focus();
   });
 });
-homeKey.addEventListener("click", () => navigate("profile"));
 for (const [control, panel] of [
   ["intro", "intro-panel"],
   ["skill", "skill-panel"],
