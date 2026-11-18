@@ -1,220 +1,219 @@
 import * as THREE from "three";
-import { poses, morphs, tabs } from "./poses.js";
+import { createBlocks } from "./effects/blocks.js";
+import { createAscii } from "./effects/ascii.js";
+import { createGrid } from "./effects/grid.js";
+import { createSlats } from "./effects/slats.js";
+
+const styleForTab = {
+  profile: "blocks",
+  work: "blocks",
+  skills: "ascii",
+  services: "grid",
+  marka: "blocks",
+};
 
 export function createScene(canvas) {
+  const button = document.getElementById("scene-toggle");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
       antialias: true,
+      powerPreference: "high-performance",
     });
   } catch {
+    document.body.dataset.sceneFallback = "true";
     canvas.hidden = true;
+    button.hidden = true;
     return { setTab() {}, dispose() {} };
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-  camera.position.set(14, 12, 14);
-  camera.lookAt(0, 0, 0);
-  const group = new THREE.Group();
-  scene.add(group);
-  const geometry = new THREE.BoxGeometry(0.8, 1, 0.8);
-  geometry.translate(0, 0.5, 0);
-  const edgeGeometry = new THREE.EdgesGeometry(geometry);
-  const bars = [];
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      const material = new THREE.MeshBasicMaterial({
-        polygonOffset: true,
-        polygonOffsetFactor: 1,
-        polygonOffsetUnits: 1,
-      });
-      const edges = new THREE.LineBasicMaterial();
-      const bar = new THREE.Mesh(geometry, material);
-      bar.add(new THREE.LineSegments(edgeGeometry, edges));
-      bar.position.set(i - 4, 0, j - 4);
-      bar.scale.y = morphs[0](i, j, 0);
-      group.add(bar);
-      bars.push({ bar, i, j, material, edges });
+  const state = {
+    p: new THREE.Vector2(0.5, 0.5),
+    velocity: new THREE.Vector2(),
+    time: 0,
+    press: 0,
+    amp: 1,
+    tab: "profile",
+  };
+  const target = state.p.clone(),
+    previous = state.p.clone(),
+    velocity = new THREE.Vector2();
+  let width = innerWidth,
+    height = innerHeight,
+    mobile = width < 768;
+  let effects = makeEffects(),
+    current = effects.blocks;
+  let frame = 0,
+    last = 0,
+    idle = 0,
+    down = false,
+    paused = reduced.matches,
+    lost = false,
+    disposed = false;
+  function makeEffects() {
+    return {
+      blocks: createBlocks(),
+      ascii: createAscii(),
+      grid: createGrid(mobile),
+      slats: createSlats(mobile),
+    };
+  }
+  function label() {
+    button.textContent = paused ? "Play effect" : "Pause effect";
+    button.setAttribute("aria-pressed", String(paused));
+  }
+  function draw(dt = 0) {
+    current.update(state, dt);
+    renderer.render(current.scene, current.camera);
+    if (state.tab === "profile") {
+      effects.slats.update(state, dt);
+      renderer.autoClear = false;
+      renderer.clearDepth();
+      renderer.render(effects.slats.scene, effects.slats.camera);
+      renderer.autoClear = true;
     }
-  }
-  const css = getComputedStyle(document.documentElement);
-  const white = new THREE.Color(css.getPropertyValue("--white").trim());
-  const black = new THREE.Color(css.getPropertyValue("--black").trim());
-  const lightBlue = new THREE.Color(css.getPropertyValue("--blue").trim());
-  const darkBlue = new THREE.Color(
-    css.getPropertyValue("--blue-on-black").trim(),
-  );
-  const face = new THREE.Color();
-  const edge = new THREE.Color();
-  const accent = new THREE.Color();
-  const pointer = new THREE.Vector2();
-  const ray = new THREE.Raycaster();
-  const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const hit = new THREE.Vector3();
-  const ripple = new THREE.Vector3();
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-  const pose = [...poses.desktop[0]];
-  let index = 0,
-    tone = 0,
-    width = 1,
-    height = 1,
-    frame = 0,
-    time = 0,
-    last = 0;
-  let pointerActive = false,
-    rippleTime = -10,
-    lost = false;
-
-  function resize() {
-    width = innerWidth;
-    height = innerHeight;
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    if (reduced.matches) render(performance.now());
-  }
-  function track(event) {
-    pointer.set(
-      (event.clientX / width) * 2 - 1,
-      -(event.clientY / height) * 2 + 1,
-    );
-    pointerActive = true;
-  }
-  function locatePointer() {
-    ray.setFromCamera(pointer, camera);
-    if (!ray.ray.intersectPlane(plane, hit)) return false;
-    group.worldToLocal(hit);
-    return true;
-  }
-  function press(event) {
-    track(event);
-    if (locatePointer()) {
-      ripple.copy(hit);
-      rippleTime = time;
-    }
-  }
-  function leave() {
-    pointerActive = false;
-  }
-  function render(now) {
-    if (lost) return;
-    const delta = Math.min((now - (last || now)) / 1000, 0.05);
-    last = now;
-    if (!reduced.matches) time += delta;
-    const ease = reduced.matches ? 1 : 1 - Math.exp(-5 * delta);
-    const target = (width < 768 || height < 480 ? poses.mobile : poses.desktop)[
-      index
-    ];
-    for (let k = 0; k < 4; k++) pose[k] += (target[k] - pose[k]) * ease;
-    tone += ((index === 4 ? 1 : 0) - tone) * ease;
-    camera.zoom = pose[2];
-    camera.setViewOffset(
-      width,
-      height,
-      -pose[0] * width,
-      -pose[1] * height,
-      width,
-      height,
-    );
-    camera.updateProjectionMatrix();
-    canvas.style.opacity = pose[3];
-    group.rotation.y +=
-      ((reduced.matches ? 0 : time * 0.055 + pointer.x * 0.2) -
-        group.rotation.y) *
-      ease;
-    group.rotation.x +=
-      ((reduced.matches ? 0 : -pointer.y * 0.04) - group.rotation.x) * ease;
-    group.updateMatrixWorld();
-    const hovering = pointerActive && !reduced.matches && locatePointer();
-    face.copy(white).lerp(black, tone);
-    edge.copy(black).lerp(white, tone);
-    accent.copy(lightBlue).lerp(darkBlue, tone);
-    for (const item of bars) {
-      const { bar, i, j, material, edges } = item;
-      const proximity = hovering
-        ? Math.max(
-            0,
-            1 -
-              Math.hypot(bar.position.x - hit.x, bar.position.z - hit.z) / 2.2,
-          )
-        : 0;
-      const age = time - rippleTime;
-      const distance = Math.hypot(
-        bar.position.x - ripple.x,
-        bar.position.z - ripple.z,
-      );
-      const wave =
-        !reduced.matches && age < 3
-          ? Math.max(0, 1 - Math.abs(distance - age * 6) / 1.2) *
-            Math.exp(-age) *
-            2
-          : 0;
-      const targetHeight =
-        morphs[index](i, j, reduced.matches ? 0 : time * 0.4) +
-        proximity * 2.4 +
-        wave;
-      bar.scale.y += (targetHeight - bar.scale.y) * ease;
-      material.color.copy(face).lerp(accent, Math.min(1, proximity * 1.4));
-      edges.color.copy(edge).lerp(accent, Math.min(1, proximity * 1.4));
-    }
-    renderer.render(scene, camera);
   }
   function loop(now) {
-    render(now);
+    if (disposed || paused || lost || document.hidden || state.tab === "work")
+      return;
+    const dt = Math.min((now - (last || now)) / 1000, 0.05);
+    last = now;
+    state.time += dt;
+    idle += dt;
+    if (idle > 2.5 && !down)
+      target.set(
+        0.5 + 0.28 * Math.sin(state.time * 0.35),
+        0.5 + 0.2 * Math.sin(state.time * 0.595),
+      );
+    previous.copy(state.p);
+    state.p.lerp(target, 1 - Math.exp(-dt * 12));
+    velocity.copy(state.p).sub(previous).divideScalar(Math.max(dt, 0.001));
+    state.velocity.lerp(velocity, 1 - Math.exp(-dt * 10));
+    state.press +=
+      ((down ? 1 : 0) - state.press) * (1 - Math.exp(-dt * (down ? 14 : 4)));
+    draw(dt);
     frame = requestAnimationFrame(loop);
   }
   function resume() {
     cancelAnimationFrame(frame);
     last = 0;
-    if (document.hidden || lost) return;
-    if (reduced.matches) render(performance.now());
-    else frame = requestAnimationFrame(loop);
+    if (disposed || lost || document.hidden) return;
+    draw();
+    if (!paused && state.tab !== "work") frame = requestAnimationFrame(loop);
+  }
+  function resize() {
+    width = innerWidth;
+    height = innerHeight;
+    if (mobile !== width < 768) {
+      mobile = width < 768;
+      Object.values(effects).forEach((effect) => effect.dispose());
+      effects = makeEffects();
+      current = effects[styleForTab[state.tab]];
+    }
+    const dpr = Math.min(devicePixelRatio, mobile ? 1.5 : 2);
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(width, height, false);
+    Object.values(effects).forEach((effect) =>
+      effect.resize(width, height, dpr),
+    );
+    resume();
+  }
+  function track(event) {
+    if (paused) return;
+    target.set(event.clientX / width, 1 - event.clientY / height);
+    idle = 0;
+  }
+  function press(event) {
+    if (paused || event.target.closest("button,a,input,select,textarea"))
+      return;
+    track(event);
+    state.p.copy(target);
+    down = true;
+    current.tap(state);
+    if (state.tab === "profile") effects.slats.tap(state);
+  }
+  function release() {
+    down = false;
+  }
+  function resetMotion() {
+    down = false;
+    state.press = 0;
+    state.velocity.set(0, 0);
+    Object.values(effects).forEach((effect) => effect.reset());
+  }
+  function preference() {
+    paused = reduced.matches;
+    state.amp = reduced.matches ? 0.3 : 1;
+    resetMotion();
+    label();
+    resume();
+  }
+  function toggle() {
+    paused = !paused;
+    resetMotion();
+    label();
+    resume();
+  }
+  function visibility() {
+    release();
+    resume();
   }
   function contextLost(event) {
     event.preventDefault();
     lost = true;
     cancelAnimationFrame(frame);
     canvas.hidden = true;
+    button.hidden = true;
+    document.body.dataset.sceneFallback = "true";
   }
   function contextRestored() {
     lost = false;
     canvas.hidden = false;
-    resume();
+    button.hidden = false;
+    delete document.body.dataset.sceneFallback;
+    resize();
   }
   window.addEventListener("resize", resize);
-  window.addEventListener("pointermove", track);
-  window.addEventListener("pointerdown", press);
-  document.addEventListener("pointerleave", leave);
-  document.addEventListener("visibilitychange", resume);
-  reduced.addEventListener("change", resume);
+  window.addEventListener("pointermove", track, { passive: true });
+  window.addEventListener("pointerdown", press, { passive: true });
+  window.addEventListener("pointerup", release);
+  window.addEventListener("pointercancel", release);
+  window.addEventListener("blur", release);
+  document.addEventListener("visibilitychange", visibility);
+  reduced.addEventListener("change", preference);
   canvas.addEventListener("webglcontextlost", contextLost);
   canvas.addEventListener("webglcontextrestored", contextRestored);
+  button.addEventListener("click", toggle);
+  state.amp = reduced.matches ? 0.3 : 1;
+  label();
   resize();
-  resume();
   return {
     setTab(name) {
-      index = Math.max(0, tabs.indexOf(name));
-      if (reduced.matches) render(performance.now());
+      state.tab = styleForTab[name] ? name : "profile";
+      current = effects[styleForTab[state.tab]];
+      canvas.dataset.effect = styleForTab[state.tab];
+      button.hidden = state.tab === "work" || lost;
+      resetMotion();
+      current.resize(width, height, renderer.getPixelRatio());
+      resume();
     },
     dispose() {
+      disposed = true;
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", track);
       window.removeEventListener("pointerdown", press);
-      document.removeEventListener("pointerleave", leave);
-      document.removeEventListener("visibilitychange", resume);
-      reduced.removeEventListener("change", resume);
+      window.removeEventListener("pointerup", release);
+      window.removeEventListener("pointercancel", release);
+      window.removeEventListener("blur", release);
+      document.removeEventListener("visibilitychange", visibility);
+      reduced.removeEventListener("change", preference);
       canvas.removeEventListener("webglcontextlost", contextLost);
       canvas.removeEventListener("webglcontextrestored", contextRestored);
-      geometry.dispose();
-      edgeGeometry.dispose();
-      bars.forEach(({ material, edges }) => {
-        material.dispose();
-        edges.dispose();
-      });
+      button.removeEventListener("click", toggle);
+      Object.values(effects).forEach((effect) => effect.dispose());
       renderer.dispose();
     },
   };

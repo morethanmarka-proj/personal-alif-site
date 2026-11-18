@@ -92,11 +92,12 @@ a:focus-visible {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+  opacity: 0.28;
 }
 #alif-stage {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   height: 100dvh;
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -108,6 +109,7 @@ header {
   flex: none;
   border-bottom: 1px solid var(--fg);
   display: flex;
+  background: var(--bg);
   align-items: center;
   gap: 24px;
   padding: 0 var(--m);
@@ -838,11 +840,6 @@ em.accent {
     scroll-behavior: auto !important;
   }
 }
-@media (min-width: 768px) and (min-height: 480px) {
-  body[data-panel="profile"] #media-scene {
-    clip-path: inset(0 0 0 60%);
-  }
-}
 @media (max-height: 480px) and (min-width: 768px) {
   :root {
     --bar: 52px;
@@ -977,13 +974,14 @@ em.accent {
   font-size: 12px;
 }
 .campaign-backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   background-size: cover;
   background-position: center;
   overflow: hidden;
   pointer-events: none;
+  visibility: hidden;
 }
 [data-screen="work"] {
   isolation: isolate;
@@ -1013,8 +1011,70 @@ em.accent {
   transform: translate(-50%, -50%);
   border: 0;
 }
+body[data-panel="work"] .campaign-backdrop {
+  visibility: visible;
+}
 body[data-panel="work"] #media-scene {
   visibility: hidden;
+}
+body[data-panel="skills"] #media-scene {
+  opacity: 0.2;
+}
+body[data-panel="services"] #media-scene {
+  opacity: 0.35;
+}
+body[data-panel="profile"],
+body[data-panel="skills"],
+body[data-panel="services"] {
+  --mu: #3d3d3d;
+}
+body[data-panel="marka"] #media-scene {
+  opacity: 0.2;
+}
+#scene-toggle {
+  flex: none;
+  align-self: center;
+  min-height: 44px;
+  padding: 0 12px;
+  margin-left: auto;
+  font-size: 12px;
+  border-left: 1px solid var(--fg);
+}
+#scene-toggle:hover,
+#scene-toggle:active {
+  background: var(--fg);
+  color: var(--bg);
+}
+body[data-scene-fallback="true"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 23px,
+      var(--accent) 23px 24px
+    ),
+    repeating-linear-gradient(0deg, transparent 0 23px, var(--accent) 23px 24px);
+}
+body[data-scene-fallback="true"][data-panel="skills"]::before {
+  background: linear-gradient(transparent, var(--accent));
+}
+body[data-scene-fallback="true"][data-panel="work"]::before {
+  display: none;
+}
+@media (max-width: 767px) {
+  #scene-toggle {
+    width: 66px;
+    padding: 0 6px;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  body[data-panel="profile"] #media-scene {
+    opacity: 0.18;
+  }
 }
 .work-detail {
   min-width: 0;

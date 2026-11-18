@@ -114,26 +114,6 @@ for (const [control, panel] of [
     }),
   );
 }
-let touch;
-root.addEventListener("pointerdown", (event) => {
-  if (event.pointerType === "touch" && !event.target.closest("button,a,nav"))
-    touch = { x: event.clientX, y: event.clientY };
-});
-root.addEventListener("pointerup", (event) => {
-  if (!touch) return;
-  const dx = event.clientX - touch.x,
-    dy = event.clientY - touch.y;
-  touch = null;
-  if (Math.abs(dx) >= 70 && Math.abs(dx) > Math.abs(dy) * 1.5)
-    navigate(
-      tabs[
-        (tabs.indexOf(current) + (dx < 0 ? 1 : -1) + tabs.length) % tabs.length
-      ],
-    );
-});
-root.addEventListener("pointercancel", () => {
-  touch = null;
-});
 const fromHash = () => navigate(location.hash.slice(1), false);
 window.addEventListener("hashchange", fromHash);
 window.addEventListener("popstate", fromHash);
