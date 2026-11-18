@@ -29,7 +29,7 @@ function navigate(name, updateHash = true) {
   const next = panels.find((panel) => panel.dataset.screen === name);
   const outgoing = panels.find((panel) => panel.dataset.screen === previous);
   document.body.dataset.panel = name;
-  document.body.dataset.tone = name === "marka" ? "dark" : "light";
+  document.body.dataset.tone = "dark";
   primary.forEach((button) => {
     const active = button.dataset.view === name;
     button.setAttribute("aria-selected", active);

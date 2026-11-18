@@ -42,23 +42,15 @@ body {
   margin: 0;
   overflow: hidden;
 }
-body {
-  --bg: var(--white);
-  --fg: var(--black);
-  --mu: var(--gray-500);
-  --accent: var(--blue);
-  background: var(--bg);
-  color: var(--fg);
-  font: 400 clamp(15px, 1.05vw, 17px) / 1.45 var(--font-sans);
-  transition:
-    background 450ms,
-    color 450ms;
-}
+body,
 body[data-tone="dark"] {
   --bg: var(--black);
   --fg: var(--white);
-  --mu: var(--gray-400);
-  --accent: var(--blue-on-black);
+  --mu: var(--white);
+  --accent: var(--white);
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 clamp(15px, 1.05vw, 17px) / 1.45 var(--font-sans);
 }
 [hidden] {
   display: none !important;
@@ -107,7 +99,7 @@ a:focus-visible {
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.28;
+  opacity: 1;
 }
 #alif-stage {
   position: relative;
@@ -123,7 +115,7 @@ header {
   flex: none;
   border-bottom: 1px solid var(--fg);
   display: flex;
-  background: var(--bg);
+  background: transparent;
   align-items: center;
   gap: 24px;
   padding: 0 var(--m);
@@ -141,18 +133,26 @@ nav {
 nav button {
   position: relative;
   white-space: nowrap;
-  color: var(--mu);
+  color: var(--fg);
   font-size: 13px;
+  font-weight: 400;
   padding: 0 6px;
   min-height: 44px;
   min-width: 44px;
   flex: none;
   scroll-snap-align: start;
-  transition: color 180ms;
+  transition:
+    color 180ms,
+    font-weight 180ms;
 }
-nav button[aria-selected="true"],
+nav button[aria-selected="true"] {
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 14px;
+}
 nav button:hover {
   color: var(--fg);
+  font-weight: 600;
 }
 nav button:active {
   color: var(--accent);
@@ -165,7 +165,7 @@ nav small {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: var(--accent);
+  background: var(--fg);
   transition:
     transform 350ms var(--ease),
     width 350ms var(--ease);
@@ -195,9 +195,15 @@ p {
 }
 h1,
 h2 {
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.92;
+}
+h2 {
+  font-weight: 600;
+}
+.title-bold {
+  font-weight: 600;
 }
 h1 {
   font-size: clamp(56px, min(12vw, 18dvh), 200px);
@@ -206,8 +212,8 @@ h2 {
   font-size: clamp(36px, 6vw, 90px);
 }
 h3 {
-  font-size: clamp(18px, 2vw, 30px);
-  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 32px);
+  font-weight: 600;
   letter-spacing: -0.03em;
 }
 strong {
@@ -216,20 +222,11 @@ strong {
 small,
 .eyebrow {
   font-size: 12px;
-  line-height: 1.3;
-  color: var(--mu);
+  line-height: 1.35;
+  color: var(--fg);
 }
 p {
   max-width: 52ch;
-}
-.serif,
-em.accent {
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-}
-em.accent {
-  color: var(--accent);
 }
 .word-mask {
   display: inline-block;
@@ -251,7 +248,7 @@ em.accent {
   justify-content: center;
   padding: 10px 20px;
   min-height: 44px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--fg);
@@ -265,13 +262,14 @@ em.accent {
   color: var(--bg);
 }
 .actions .primary:hover {
-  background: var(--accent);
-  color: var(--white);
-  border-color: var(--accent);
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--fg);
 }
 .actions .secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
 }
 .actions a:active {
   transform: translateY(1px);
@@ -288,6 +286,7 @@ em.accent {
   padding: 10px 14px;
   border: 1px solid var(--fg);
   font-size: 12px;
+  font-weight: 500;
   transition:
     background 180ms,
     color 180ms,
@@ -300,18 +299,13 @@ em.accent {
 [data-project][aria-pressed="true"] {
   background: var(--fg);
   color: var(--bg);
+  font-weight: 600;
 }
 .subnav button:hover,
 [data-project]:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.subnav button[aria-selected="true"]:hover,
-.subnav button[aria-pressed="true"]:hover,
-[data-project][aria-selected="true"]:hover,
-[data-project][aria-pressed="true"]:hover {
+  background: var(--fg);
   color: var(--bg);
-  background: var(--accent);
+  border-color: var(--fg);
 }
 .subnav button:active,
 [data-project]:active {
@@ -345,21 +339,29 @@ em.accent {
   filter: grayscale(1);
 }
 .profile-positioning {
-  font-size: clamp(20px, 2.5vw, 36px);
-  font-weight: 500;
+  font-size: clamp(20px, 2.3vw, 34px);
+  font-weight: 400;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.15;
+}
+.profile-positioning strong {
+  font-weight: 600;
+  display: block;
+  font-size: clamp(24px, 2.8vw, 40px);
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
 }
 .profile-view [data-intro-panel] {
   width: 58%;
   min-height: 140px;
 }
 .overview-lead {
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(17px, 1.35vw, 22px);
-  line-height: 1.35;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(18px, 1.45vw, 23px);
+  line-height: 1.3;
+  letter-spacing: -0.025em;
   color: var(--fg);
   margin-bottom: 10px;
   max-width: 48ch;
@@ -388,27 +390,31 @@ em.accent {
 .visual-grid small {
   display: block;
 }
+.visual-grid strong {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
 .visual-grid small {
   margin-top: 6px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--fg);
 }
 .proof-stat {
   font-size: clamp(24px, 3vw, 48px);
   line-height: 1;
   letter-spacing: -0.06em;
-  font-weight: 500;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  min-width: 55px;
-}
-.proof-image {
-  width: 64px;
-  height: 44px;
-  object-fit: cover;
+  min-width: 64px;
 }
 .profile-evidence li {
   padding: 10px;
 }
 .profile-evidence strong {
-  font-size: 13px;
+  font-size: 14px;
 }
 .profile-evidence a,
 .video-controls a {
@@ -418,25 +424,7 @@ em.accent {
   min-width: 44px;
 }
 .profile-evidence small {
-  font-size: 11px;
-}
-.marks {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 12px;
-}
-.mark {
-  display: flex;
-  align-items: center;
   font-size: 12px;
-}
-.mark img {
-  width: 80px;
-  height: 26px;
-  object-fit: contain;
-  filter: grayscale(1);
 }
 .marquee-track {
   display: flex;
@@ -928,7 +916,7 @@ em.accent {
   margin-top: auto;
   margin-inline: calc(-1 * var(--m));
   overflow: hidden;
-  background: var(--bg);
+  background: transparent;
   flex: none;
 }
 .text-marquee {
@@ -964,50 +952,25 @@ em.accent {
 [data-screen="work"] {
   isolation: isolate;
 }
-body[data-panel="work"] #media-scene {
-  opacity: 0.24;
-}
-body[data-panel="skills"] #media-scene {
-  opacity: 0.2;
-}
-body[data-panel="services"] #media-scene {
-  opacity: 0.35;
-}
-body[data-panel="profile"],
-body[data-panel="work"],
-body[data-panel="skills"],
-body[data-panel="services"] {
-  --mu: #3d3d3d;
-}
-body[data-panel="marka"] #media-scene {
-  opacity: 0.2;
-}
 body[data-scene-fallback="true"]::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.08;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 23px,
-      var(--accent) 23px 24px
-    ),
-    repeating-linear-gradient(0deg, transparent 0 23px, var(--accent) 23px 24px);
-}
-body[data-scene-fallback="true"][data-panel="skills"]::before {
-  background: linear-gradient(transparent, var(--accent));
+  opacity: 1;
+  background: linear-gradient(35deg, #000 0%, #0b186b 50%, #1b3bff 100%);
 }
 body[data-scene-fallback="true"][data-panel="work"]::before {
-  opacity: 0.14;
-  background: linear-gradient(35deg, #fff 0%, #bac5ff 45%, #1b3bff 100%);
+  background: linear-gradient(35deg, #000 0%, #5c0f12 50%, #dc2626 100%);
 }
-@media (max-width: 767px) {
-  body[data-panel="profile"] #media-scene,
-  body[data-panel="work"] #media-scene {
-    opacity: 0.18;
-  }
+body[data-scene-fallback="true"][data-panel="skills"]::before {
+  background: linear-gradient(35deg, #000 0%, #37136b 50%, #7c3aed 100%);
+}
+body[data-scene-fallback="true"][data-panel="services"]::before {
+  background: linear-gradient(35deg, #000 0%, #27272a 50%, #52525b 100%);
+}
+body[data-scene-fallback="true"][data-panel="marka"]::before {
+  background: linear-gradient(35deg, #000 0%, #064e3b 50%, #10b981 100%);
 }
 .work-detail {
   min-width: 0;

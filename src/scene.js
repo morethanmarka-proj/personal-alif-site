@@ -1,24 +1,15 @@
 import * as THREE from "three";
-import { createBlocks } from "./effects/blocks.js";
-import { createAscii } from "./effects/ascii.js";
-import { createGrid } from "./effects/grid.js";
 import { createGrainient } from "./effects/grainient.js";
 
-const styleForTab = {
-  profile: "blocks",
-  work: "grainient",
-  skills: "ascii",
-  services: "grid",
-  marka: "blocks",
-};
+const VALID_TABS = new Set(["profile", "work", "skills", "services", "marka"]);
 
 export function createScene(canvas) {
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({
       canvas,
-      alpha: true,
-      antialias: true,
+      alpha: false,
+      antialias: false,
       powerPreference: "high-performance",
     });
   } catch {
@@ -40,27 +31,16 @@ export function createScene(canvas) {
   let width = innerWidth,
     height = innerHeight,
     mobile = width < 768;
-  let effects = makeEffects(),
-    current = effects.blocks;
+  const current = createGrainient(renderer);
+  canvas.dataset.effect = "grainient";
   let frame = 0,
     last = 0,
     idle = 0,
     down = false,
     lost = false,
     disposed = false;
-  function makeEffects() {
-    return {
-      blocks: createBlocks(),
-      grainient: createGrainient(renderer),
-      ascii: createAscii(),
-      grid: createGrid(mobile),
-    };
-  }
   function getDpr() {
-    if (state.tab === "work") {
-      return Math.min(devicePixelRatio, mobile ? 0.75 : 1.25);
-    }
-    return Math.min(devicePixelRatio, mobile ? 1.5 : 2);
+    return Math.min(devicePixelRatio, mobile ? 0.75 : 1.25);
   }
   function draw(dt = 0) {
     current.update(state, dt);
@@ -96,18 +76,11 @@ export function createScene(canvas) {
   function resize() {
     width = innerWidth;
     height = innerHeight;
-    if (mobile !== width < 768) {
-      mobile = width < 768;
-      Object.values(effects).forEach((effect) => effect.dispose());
-      effects = makeEffects();
-      current = effects[styleForTab[state.tab]];
-    }
+    mobile = width < 768;
     const dpr = getDpr();
     renderer.setPixelRatio(dpr);
     renderer.setSize(width, height, false);
-    Object.values(effects).forEach((effect) =>
-      effect.resize(width, height, dpr),
-    );
+    current.resize(width, height, dpr);
     resume();
   }
   function track(event) {
@@ -123,12 +96,6 @@ export function createScene(canvas) {
   }
   function release() {
     down = false;
-  }
-  function resetMotion() {
-    down = false;
-    state.press = 0;
-    state.velocity.set(0, 0);
-    Object.values(effects).forEach((effect) => effect.reset());
   }
   function contextLost(event) {
     event.preventDefault();
@@ -154,15 +121,8 @@ export function createScene(canvas) {
   resize();
   return {
     setTab(name) {
-      state.tab = styleForTab[name] ? name : "profile";
-      current = effects[styleForTab[state.tab]];
-      canvas.dataset.effect = styleForTab[state.tab];
-      const dpr = getDpr();
-      renderer.setPixelRatio(dpr);
-      renderer.setSize(width, height, false);
-      resetMotion();
-      current.resize(width, height, dpr);
-      resume();
+      state.tab = VALID_TABS.has(name) ? name : "profile";
+      canvas.dataset.effect = "grainient";
     },
     dispose() {
       disposed = true;
@@ -175,7 +135,7 @@ export function createScene(canvas) {
       window.removeEventListener("blur", release);
       canvas.removeEventListener("webglcontextlost", contextLost);
       canvas.removeEventListener("webglcontextrestored", contextRestored);
-      Object.values(effects).forEach((effect) => effect.dispose());
+      current.dispose();
       renderer.dispose();
     },
   };

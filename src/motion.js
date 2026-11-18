@@ -33,7 +33,11 @@ export function reveal(container, direction = 1) {
       heading.setAttribute("aria-label", heading.textContent.trim());
       const tokens = [];
       for (const node of heading.childNodes) {
-        const cls = node.nodeType === 1 ? node.className : "";
+        const baseCls = node.nodeType === 1 ? node.className : "";
+        const isStrong = node.nodeType === 1 && node.nodeName === "STRONG";
+        const cls = [baseCls, isStrong ? "title-bold" : ""]
+          .filter(Boolean)
+          .join(" ");
         for (const word of (node.textContent || "").trim().split(/\s+/)) {
           if (word) tokens.push({ word, cls });
         }
