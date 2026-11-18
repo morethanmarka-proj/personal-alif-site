@@ -9,7 +9,7 @@ const homeKey = root.querySelector(".home-key");
 const primary = [...root.querySelectorAll("nav [data-view]")];
 const panels = [...root.querySelectorAll("[data-screen]")];
 const scene = createScene(document.getElementById("media-scene"));
-const campaign = setupWork();
+setupWork();
 let current = "profile";
 let transition = 0;
 const underline = document.createElement("span");
@@ -39,7 +39,6 @@ function navigate(name, updateHash = true) {
   });
   if (updateHash) history.replaceState(null, "", "#" + name);
   scene.setTab(name);
-  campaign.setActive(name === "work");
   positionIndicator();
   primary
     .find((button) => button.dataset.view === name)
@@ -160,5 +159,4 @@ navigate(location.hash.slice(1) || "profile");
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
     scene.dispose();
-    campaign.dispose();
   });

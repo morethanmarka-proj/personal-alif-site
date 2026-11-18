@@ -1,9 +1,7 @@
 import { work } from "./work-data.js";
-import { campaignVideo } from "./campaign-video.js";
 import { swap } from "./motion.js";
 
 export function setupWork() {
-  const video = campaignVideo();
   const content = document.getElementById("work-content");
   const title = document.getElementById("work-client");
   const roles = [...document.querySelectorAll("[data-role]")];
@@ -38,7 +36,6 @@ export function setupWork() {
       item.tabIndex = active ? 0 : -1;
     });
     button.scrollIntoView({ block: "nearest", inline: "nearest" });
-    video.setVideo(work[role].video);
     render();
   };
   roles.forEach((button, idx) => {
@@ -100,7 +97,5 @@ export function setupWork() {
       sections[nextIdx].focus();
     });
   });
-  video.setVideo(work[role].video);
   render();
-  return video;
 }

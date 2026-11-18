@@ -2,10 +2,11 @@ import * as THREE from "three";
 import { createBlocks } from "./effects/blocks.js";
 import { createAscii } from "./effects/ascii.js";
 import { createGrid } from "./effects/grid.js";
+import { createGrainient } from "./effects/grainient.js";
 
 const styleForTab = {
   profile: "blocks",
-  work: "blocks",
+  work: "grainient",
   skills: "ascii",
   services: "grid",
   marka: "blocks",
@@ -50,16 +51,23 @@ export function createScene(canvas) {
   function makeEffects() {
     return {
       blocks: createBlocks(),
+      grainient: createGrainient(renderer),
       ascii: createAscii(),
       grid: createGrid(mobile),
     };
+  }
+  function getDpr() {
+    if (state.tab === "work") {
+      return Math.min(devicePixelRatio, mobile ? 0.75 : 1.25);
+    }
+    return Math.min(devicePixelRatio, mobile ? 1.5 : 2);
   }
   function draw(dt = 0) {
     current.update(state, dt);
     renderer.render(current.scene, current.camera);
   }
   function loop(now) {
-    if (disposed || lost || state.tab === "work") return;
+    if (disposed || lost) return;
     const dt = Math.min((now - (last || now)) / 1000, 0.05);
     last = now;
     state.time += dt;
@@ -83,7 +91,7 @@ export function createScene(canvas) {
     last = 0;
     if (disposed || lost) return;
     draw();
-    if (state.tab !== "work") frame = requestAnimationFrame(loop);
+    frame = requestAnimationFrame(loop);
   }
   function resize() {
     width = innerWidth;
@@ -94,7 +102,7 @@ export function createScene(canvas) {
       effects = makeEffects();
       current = effects[styleForTab[state.tab]];
     }
-    const dpr = Math.min(devicePixelRatio, mobile ? 1.5 : 2);
+    const dpr = getDpr();
     renderer.setPixelRatio(dpr);
     renderer.setSize(width, height, false);
     Object.values(effects).forEach((effect) =>
@@ -149,8 +157,11 @@ export function createScene(canvas) {
       state.tab = styleForTab[name] ? name : "profile";
       current = effects[styleForTab[state.tab]];
       canvas.dataset.effect = styleForTab[state.tab];
+      const dpr = getDpr();
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(width, height, false);
       resetMotion();
-      current.resize(width, height, renderer.getPixelRatio());
+      current.resize(width, height, dpr);
       resume();
     },
     dispose() {

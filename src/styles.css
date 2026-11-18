@@ -984,70 +984,11 @@ em.accent {
   align-items: center;
   gap: 16px;
 }
-.video-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  font-size: 12px;
-}
-#video-toggle {
-  min-height: 44px;
-  min-width: 44px;
-  padding: 8px 12px;
-  border: 1px solid var(--fg);
-}
-#video-toggle:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-.video-status {
-  min-height: 16px;
-  font-size: 12px;
-}
-.campaign-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-  pointer-events: none;
-  visibility: hidden;
-}
 [data-screen="work"] {
   isolation: isolate;
 }
-.campaign-backdrop::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.88);
-}
-#campaign-video {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-}
-.is-playing #campaign-video {
-  opacity: 1;
-}
-#campaign-video iframe {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  min-width: calc((100dvh - var(--bar)) * 16 / 9);
-  min-height: calc(100vw * 9 / 16);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 0;
-}
-body[data-panel="work"] .campaign-backdrop {
-  visibility: visible;
-}
 body[data-panel="work"] #media-scene {
-  visibility: hidden;
+  opacity: 0.24;
 }
 body[data-panel="skills"] #media-scene {
   opacity: 0.2;
@@ -1056,6 +997,7 @@ body[data-panel="services"] #media-scene {
   opacity: 0.35;
 }
 body[data-panel="profile"],
+body[data-panel="work"],
 body[data-panel="skills"],
 body[data-panel="services"] {
   --mu: #3d3d3d;
@@ -1081,10 +1023,12 @@ body[data-scene-fallback="true"][data-panel="skills"]::before {
   background: linear-gradient(transparent, var(--accent));
 }
 body[data-scene-fallback="true"][data-panel="work"]::before {
-  display: none;
+  opacity: 0.14;
+  background: linear-gradient(35deg, #fff 0%, #bac5ff 45%, #1b3bff 100%);
 }
 @media (max-width: 767px) {
-  body[data-panel="profile"] #media-scene {
+  body[data-panel="profile"] #media-scene,
+  body[data-panel="work"] #media-scene {
     opacity: 0.18;
   }
 }
