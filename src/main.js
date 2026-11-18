@@ -1,12 +1,14 @@
 import "./styles.css";
 import { tabs } from "./poses.js";
 import { createScene } from "./scene.js";
+import { setupWork } from "./work.js";
 import { reveal, swap, magneticButtons, reducedMotion } from "./motion.js";
 
 const root = document.getElementById("alif-stage");
 const primary = [...root.querySelectorAll("nav [data-view]")];
 const panels = [...root.querySelectorAll("[data-screen]")];
 const scene = createScene(document.getElementById("media-scene"));
+const campaign = setupWork();
 let current = "profile";
 let transition = 0;
 const underline = document.createElement("span");
@@ -35,6 +37,7 @@ function navigate(name, updateHash = true) {
   });
   if (updateHash) history.replaceState(null, "", "#" + name);
   scene.setTab(name);
+  campaign.setActive(name === "work");
   positionIndicator();
   primary
     .find((button) => button.dataset.view === name)
@@ -93,8 +96,6 @@ root
   .addEventListener("click", () => navigate("profile"));
 for (const [control, panel] of [
   ["intro", "intro-panel"],
-  ["role", "detail"],
-  ["project", "case"],
   ["skill", "skill-panel"],
   ["service", "service-panel"],
 ]) {
@@ -140,4 +141,26 @@ window.addEventListener("resize", positionIndicator);
 document.fonts.ready.then(positionIndicator);
 magneticButtons();
 navigate(location.hash.slice(1) || "profile");
-if (import.meta.hot) import.meta.hot.dispose(() => scene.dispose());
+const marqueeButton = document.getElementById("marquee-toggle");
+let textPaused = reducedMotion.matches;
+function updateMarquee() {
+  document
+    .querySelector(".marquee-pair")
+    .classList.toggle("is-paused", textPaused);
+  marqueeButton.textContent = textPaused ? "Play text" : "Pause text";
+  marqueeButton.setAttribute("aria-pressed", String(textPaused));
+}
+marqueeButton.addEventListener("click", () => {
+  textPaused = !textPaused;
+  updateMarquee();
+});
+reducedMotion.addEventListener("change", () => {
+  textPaused = reducedMotion.matches;
+  updateMarquee();
+});
+updateMarquee();
+if (import.meta.hot)
+  import.meta.hot.dispose(() => {
+    scene.dispose();
+    campaign.dispose();
+  });

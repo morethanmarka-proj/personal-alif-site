@@ -191,7 +191,7 @@
                 <span class="proof-stat">−18%</span>
                 <div>
                   <strong>MoveIt PH</strong
-                  ><small>Cost per session over three months.</small>
+                  ><small>Lower cost per acquisition (CPA).</small>
                 </div>
               </li>
               <li>
@@ -225,28 +225,61 @@
               </li>
             </ul>
           </div>
-          <div class="marquee" aria-label="Selected experience">
-            <div class="marquee-track">
-              <div class="marquee-group">
-                <span>Indonesian MSMEs</span
-                ><img src="assets/moveit.webp" alt="MoveIt" /><img
-                  src="assets/traveloka.webp"
-                  alt="Traveloka"
-                /><img src="assets/grab.webp" alt="Grab" />
-              </div>
-              <div class="marquee-group" aria-hidden="true">
-                <span>Indonesian MSMEs</span
-                ><img src="assets/moveit.webp" alt="MoveIt" /><img
-                  src="assets/traveloka.webp"
-                  alt="Traveloka"
-                /><img src="assets/grab.webp" alt="Grab" />
+          <div class="marquee-pair">
+            <div class="text-marquee" aria-label="Expertise">
+              <div class="marquee-track">
+                <div class="marquee-group">
+                  <span>Marketing and branding</span
+                  ><span>Performance marketing</span
+                  ><span>AI-powered marketing</span><span>Analytics</span
+                  ><span>Media planning</span><span>Paid media</span>
+                </div>
+                <div class="marquee-group" aria-hidden="true">
+                  <span>Marketing and branding</span
+                  ><span>Performance marketing</span
+                  ><span>AI-powered marketing</span><span>Analytics</span
+                  ><span>Media planning</span><span>Paid media</span>
+                </div>
               </div>
             </div>
+            <div class="text-marquee" aria-label="Experience">
+              <div class="marquee-track">
+                <div class="marquee-group">
+                  <span>Grab · Philippines, Cambodia, Myanmar</span
+                  ><span>MoveIt Philippines</span><span>Traveloka Malaysia</span
+                  ><span>Indonesian UMKM</span>
+                </div>
+                <div class="marquee-group" aria-hidden="true">
+                  <span>Grab · Philippines, Cambodia, Myanmar</span
+                  ><span>MoveIt Philippines</span><span>Traveloka Malaysia</span
+                  ><span>Indonesian UMKM</span>
+                </div>
+              </div>
+            </div>
+            <button type="button" id="marquee-toggle" aria-pressed="false">
+              Pause text
+            </button>
           </div>
         </section>
         <section class="view" data-screen="work" hidden>
-          <h2>Work Experience</h2>
-          <div class="split">
+          <div class="campaign-backdrop" aria-hidden="true">
+            <div id="campaign-video"></div>
+          </div>
+          <div class="work-heading">
+            <h2>Work experience</h2>
+            <div class="video-controls">
+              <button type="button" id="video-toggle">Pause video</button
+              ><a
+                id="video-link"
+                href="https://www.youtube.com/watch?v=mBC6PHEQeK4"
+                target="_blank"
+                rel="noopener"
+                >Watch on YouTube</a
+              >
+            </div>
+          </div>
+          <p id="video-status" class="video-status" role="status"></p>
+          <div class="split work-layout">
             <ol class="timeline" aria-label="Career timeline, newest first">
               <li>
                 <button type="button" data-role="saatchi" aria-pressed="true">
@@ -284,273 +317,40 @@
                   ><small>M+C Saatchi Performance · Mar 2022 – Apr 2024</small>
                 </button>
               </li>
-              <li>
-                <button type="button" data-role="mgd" aria-pressed="false">
-                  <strong>Campaign Optimizer</strong
-                  ><small>MG Digital · Aug 2021 – Mar 2022</small>
-                </button>
-              </li>
             </ol>
-            <div class="detail" aria-live="polite">
-              <div data-detail="saatchi">
-                <div data-case="moveit">
-                  <h3>MoveIt PH</h3>
-                  <div class="result">
-                    <strong>−18%</strong
-                    ><span
-                      >Cost per session<br /><small
-                        >Over three months</small
-                      ></span
-                    >
-                  </div>
-                  <ul class="visual-grid">
-                    <li>
-                      <span class="visual-symbol" aria-hidden="true">◎</span>
-                      <div>
-                        <strong>Media strategy</strong
-                        ><small
-                          >Owned full-funnel planning across paid social and
-                          search.</small
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <span class="visual-symbol" aria-hidden="true">↘</span>
-                      <div>
-                        <strong>Optimization</strong
-                        ><small
-                          >Reallocated budget using cross-channel performance
-                          data.</small
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <span class="visual-symbol" aria-hidden="true">⊕</span>
-                      <div>
-                        <strong>Channel expansion</strong
-                        ><small
-                          >Onboarded media partners to extend the mix.</small
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <span class="visual-symbol" aria-hidden="true">◇</span>
-                      <div>
-                        <strong>Client &amp; team</strong
-                        ><small
-                          >Partnered with MoveIt and mentored two
-                          teammates.</small
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div data-case="gold" hidden>
-                  <h3>OneGrab Holiday</h3>
-                  <span class="metric">Gold</span>
-                  <p>2026 Excellence in Media Strategy</p>
-                  <small>Grab and M+C Saatchi Performance</small>
-                  <p>
-                    <a
-                      href="https://awards.marketing-interactive.com/marketing-excellence-ph/2026-winners/"
-                      >Awards listing</a
-                    >
-                  </p>
-                </div>
-                <div class="actions">
-                  <button
-                    type="button"
-                    data-project="moveit"
-                    aria-pressed="true"
-                  >
-                    MoveIt PH</button
-                  ><button
-                    type="button"
-                    data-project="gold"
-                    aria-pressed="false"
-                  >
-                    Awards
-                  </button>
-                </div>
-              </div>
-              <div data-detail="traveloka" hidden>
-                <div class="case-heading">
-                  <h3>Traveloka Malaysia</h3>
-                  <img src="assets/hargabagus.webp" alt="" />
-                </div>
-                <div class="result">
-                  <strong>+7%</strong
-                  ><span
-                    >Marketing profitability<br /><small
-                      >Quarter over quarter</small
-                    ></span
-                  >
-                </div>
-                <ul class="visual-grid">
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">◎</span>
-                    <div>
-                      <strong>Growth campaigns</strong
-                      ><small
-                        >Led seasonal campaigns and ran paid display and
-                        app-install campaigns for Malaysia.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▷</span>
-                    <div>
-                      <strong>#HargaBagus</strong
-                      ><small
-                        >Led Malaysia’s first full-funnel branding
-                        campaign.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▥</span>
-                    <div>
-                      <strong>Measurement</strong
-                      ><small
-                        >Built Brand Lift, Conversion Lift, and incrementality
-                        reporting.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">◇</span>
-                    <div>
-                      <strong>Partnerships</strong
-                      ><small
-                        >Negotiated media partnerships and worked with product
-                        and analytics.</small
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div data-detail="senior-media" hidden>
-                <div class="case-heading">
-                  <h3>No Sweat Summer · Grab PH</h3>
-                  <img src="assets/summer.webp" alt="" />
-                </div>
-                <p class="role-summary">
-                  Ran Grab campaigns across the Philippines and Cambodia, from
-                  launch and creative testing to client reporting and
-                  reconciliation.
-                </p>
-                <small class="recognition"
-                  >Cannes Silver Lion · Viral Film, 2024</small
+            <div class="work-detail">
+              <h3 id="work-client">MoveIt Philippines</h3>
+              <div class="subnav" aria-label="Work details">
+                <button
+                  type="button"
+                  data-work-section="client"
+                  aria-pressed="true"
                 >
-                <ul class="visual-grid">
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">◎</span>
-                    <div>
-                      <strong>Planning support</strong
-                      ><small
-                        >Paired high-impact placements with contextual
-                        reach.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▷</span>
-                    <div>
-                      <strong>Campaign execution</strong
-                      ><small
-                        >Led delivery across channels and funnel stages.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">✦</span>
-                    <div>
-                      <strong>Creative amplification</strong
-                      ><small
-                        >Connected storytelling, short-form video, and
-                        creators.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▥</span>
-                    <div>
-                      <strong>Brand Lift Study</strong
-                      ><small>Drove initiatives to measure brand impact.</small>
-                    </div>
-                  </li>
-                </ul>
+                  Client
+                </button>
+                <button
+                  type="button"
+                  data-work-section="responsibilities"
+                  aria-pressed="false"
+                >
+                  Responsibilities
+                </button>
+                <button
+                  type="button"
+                  data-work-section="channels"
+                  aria-pressed="false"
+                >
+                  Channels
+                </button>
+                <button
+                  type="button"
+                  data-work-section="results"
+                  aria-pressed="false"
+                >
+                  Results
+                </button>
               </div>
-              <div data-detail="media-exec" hidden>
-                <h3>Campaign operations</h3>
-                <ul class="visual-grid">
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▷</span>
-                    <div>
-                      <strong>Setup &amp; launch</strong
-                      ><small
-                        >Set up campaigns across paid social, programmatic, and
-                        third-party publishers.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">✦</span>
-                    <div>
-                      <strong>Creative management</strong
-                      ><small
-                        >Coordinated assets and checked readiness for
-                        launch.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▥</span>
-                    <div>
-                      <strong>Pacing &amp; delivery</strong
-                      ><small
-                        >Tracked spend and delivery against the campaign
-                        plan.</small
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div data-detail="mgd" hidden>
-                <h3>Indonesian small businesses</h3>
-                <ul class="visual-grid">
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">◎</span>
-                    <div>
-                      <strong>Campaign optimization</strong
-                      ><small
-                        >Set up and optimized paid campaigns with technical
-                        checks.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">◇</span>
-                    <div>
-                      <strong>E-commerce setup</strong
-                      ><small
-                        >Helped clients get their websites and commerce channels
-                        ready.</small
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <span class="visual-symbol" aria-hidden="true">▥</span>
-                    <div>
-                      <strong>Growth analysis</strong
-                      ><small
-                        >Reviewed funnel performance with the growth consultant
-                        to guide client strategy.</small
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <div id="work-content"></div>
             </div>
           </div>
         </section>
