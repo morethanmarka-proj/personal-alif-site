@@ -185,9 +185,9 @@ strong {
 }
 .view {
   position: absolute;
-  inset: clamp(12px, 2vh, 22px) var(--space);
+  inset: 0;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 0;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -1011,7 +1011,7 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     min-height: 44px;
   }
   .view {
-    inset: 10px var(--space);
+    inset: 0;
   }
   .view-heading {
     gap: 6px;
