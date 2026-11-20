@@ -21,6 +21,7 @@
 }
 :root {
   --fg: #fff;
+  --fg-muted: rgba(255, 255, 255, 0.8);
   --line: rgba(255, 255, 255, 0.38);
   --wash: rgba(0, 0, 0, 0.18);
   --bar: 64px;
@@ -41,9 +42,11 @@ body {
 body {
   font-size: clamp(14px, 1vw, 16px);
   line-height: 1.5;
+  font-weight: 400;
 }
 body[data-panel="marka"] {
   --fg: #151515;
+  --fg-muted: rgba(21, 21, 21, 0.76);
   --line: rgba(0, 0, 0, 0.35);
   --wash: rgba(255, 255, 255, 0.14);
 }
@@ -92,9 +95,10 @@ figure {
 h1,
 h2,
 h3 {
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.045em;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  color: var(--fg);
 }
 p {
   max-width: 68ch;
@@ -109,7 +113,7 @@ h3 {
   font-size: clamp(21px, 2vw, 32px);
 }
 button strong {
-  font-weight: 500;
+  font-weight: 600;
 }
 #media-scene {
   position: fixed;
@@ -210,10 +214,12 @@ body[data-panel="marka"] .view {
 }
 .view-heading p {
   font-size: 14px;
+  color: var(--fg-muted);
 }
 .micro {
   font-size: 12px;
   line-height: 1.45;
+  color: var(--fg-muted);
 }
 .lead {
   font-size: clamp(15px, 1.25vw, 19px);
@@ -398,10 +404,52 @@ body[data-panel="marka"] .view {
   padding: clamp(16px, 2vw, 24px);
   border-right: 1px solid var(--line);
 }
-.career-strip {
-  font-size: 12px;
+.career-flow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+.career-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  background: var(--wash);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+  transition:
+    background 220ms,
+    color 220ms,
+    border-color 220ms;
+}
+.career-step:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--fg-muted);
+}
+.career-step:nth-child(2)::after {
+  content: "↘";
+  right: auto;
+  left: 50%;
+  top: auto;
+  bottom: -14px;
+  transform: translateX(-50%);
+}
+.career-step[data-active="true"] {
+  background: var(--fg);
+  color: #111;
+  border-color: var(--fg);
   font-weight: 600;
-  line-height: 1.6;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
 }
 .case-canvas {
   display: flex;
@@ -423,8 +471,9 @@ body[data-panel="marka"] .view {
 }
 .case-summary {
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.45;
   max-width: 44ch;
+  color: var(--fg-muted);
 }
 .case-diagram {
   display: flex;
@@ -1012,17 +1061,20 @@ body[data-scene-fallback="true"][data-panel="marka"] {
   }
   .view {
     inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .view-heading {
     gap: 6px;
-    padding: 12px 14px;
+    padding: 14px 16px;
   }
   .view-heading h2 {
     font-size: clamp(22px, 5.5vw, 32px);
     max-width: 30ch;
   }
   .view-heading p {
-    display: none;
+    font-size: 13px;
+    line-height: 1.4;
   }
   .focus-nav {
     display: flex;
@@ -1061,49 +1113,50 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     display: flex !important;
   }
   .profile-view {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   .profile-copy {
-    grid-column: 1/-1;
-    align-self: center;
-    gap: 12px;
-    padding: 16px;
+    flex: none;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 24px 16px 20px;
   }
   .profile-copy .greeting {
     font-size: 20px;
   }
   .profile-copy h1 {
-    font-size: clamp(32px, 8vw, 52px);
+    font-size: clamp(32px, 8.5vw, 52px);
   }
   .profile-copy .role {
-    font-size: 12px;
+    font-size: 13px;
   }
   .profile-copy .lead {
-    font-size: 13px;
+    font-size: 14px;
   }
   .personal-band {
     display: flex;
     flex-direction: column;
+    flex: none;
   }
   .personal-band > div:first-child {
-    padding: 12px 16px;
+    padding: 16px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
   .personal-band h2 {
-    font-size: 17px;
+    font-size: 18px;
   }
   .personal-band p {
-    font-size: 12px;
+    font-size: 13px;
   }
   .personal-links {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    padding: 10px 16px;
+    padding: 12px 16px;
   }
   .personal-links .traits {
     font-size: 11px;
@@ -1120,8 +1173,8 @@ body[data-scene-fallback="true"][data-panel="marka"] {
   }
   .case-rail {
     flex: none;
-    gap: 6px;
-    padding: 10px 14px;
+    gap: 10px;
+    padding: 12px 14px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
@@ -1131,8 +1184,8 @@ body[data-scene-fallback="true"][data-panel="marka"] {
   .case-rail .selector-list button {
     flex: 1;
     min-width: 0;
-    min-height: 52px;
-    padding: 6px;
+    min-height: 50px;
+    padding: 8px 6px;
     border-bottom: 0;
     border-right: 1px solid var(--line);
     font-size: 11px;
@@ -1144,9 +1197,29 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     font-size: 12px;
   }
   .case-rail .selector-list button span,
-  .career-strip,
   .case-rail > .micro {
     display: none;
+  }
+  .career-flow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .career-step {
+    font-size: 10px;
+    min-height: 32px;
+    padding: 4px;
+  }
+  .career-step:nth-child(2)::after {
+    content: "→";
+    right: -10px;
+    left: auto;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+  .career-step:not(:last-child)::after {
+    right: -10px;
+    font-size: 10px;
   }
   .case-rail > .text-action {
     min-height: 28px;
@@ -1154,23 +1227,23 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     font-size: 11px;
   }
   .case-canvas {
-    flex: 1;
-    min-height: 0;
+    flex: none;
+    justify-content: flex-start;
     border: 0;
-    padding: 12px 14px;
-    gap: 8px;
+    padding: 16px 14px;
+    gap: 14px;
   }
   .case-canvas figcaption {
     font-size: 20px;
   }
   .case-summary {
-    font-size: 11px;
+    font-size: 12px;
   }
   .case-diagram {
-    gap: 10px;
+    gap: 12px;
   }
   .diagram-node {
-    padding: 8px 10px;
+    padding: 10px 12px;
     grid-template-columns: 24px 1fr;
   }
   .diagram-node strong {
@@ -1181,14 +1254,13 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     font-size: 12px;
   }
   .case-canvas > .micro {
-    font-size: 10px;
+    font-size: 11px;
   }
   .case-insight {
-    flex: 1;
-    min-height: 0;
+    flex: none;
     justify-content: flex-start;
     gap: 14px;
-    padding: 14px;
+    padding: 16px 14px;
   }
   .case-insight h3 {
     min-height: 0;
@@ -1202,14 +1274,14 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     padding: 6px 8px;
   }
   .funnel {
-    flex: 1;
-    justify-content: center;
-    gap: 20px;
+    flex: none;
+    justify-content: flex-start;
+    gap: 16px;
     border-right: 0;
-    padding: 14px;
+    padding: 16px 14px;
   }
   .funnel button {
-    min-height: 68px;
+    min-height: 64px;
     padding: 12px;
   }
   .funnel button strong {
@@ -1219,23 +1291,23 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     font-size: 11px;
   }
   .skill-detail {
-    flex: 1;
-    justify-content: center;
+    flex: none;
+    justify-content: flex-start;
     gap: 14px;
-    padding: 14px;
+    padding: 16px 14px;
   }
   .skill-detail h3 {
     font-size: 26px;
   }
   .skill-detail .detail-note {
-    font-size: 17px;
+    font-size: 16px;
   }
   .proof-dock {
-    flex: 1;
+    flex: none;
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
-    padding: 14px;
+    padding: 16px 14px;
   }
   .proof-content {
     display: flex;
@@ -1250,22 +1322,22 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     border-bottom: 0;
   }
   #service-selector {
-    flex: 1;
-    justify-content: center;
+    flex: none;
+    justify-content: flex-start;
     border-right: 0;
-    padding: 14px;
+    padding: 16px 14px;
   }
   #service-selector button {
     padding: 14px 12px;
-    min-height: 74px;
+    min-height: 70px;
     border: 1px solid var(--line);
     margin-bottom: 8px;
   }
   .service-offer {
-    flex: 1;
-    gap: 8px;
+    flex: none;
+    gap: 10px;
     justify-content: flex-start;
-    padding: 14px;
+    padding: 16px 14px;
   }
   .service-offer h3 {
     font-size: 20px;
@@ -1301,12 +1373,12 @@ body[data-scene-fallback="true"][data-panel="marka"] {
     font-size: 13px;
   }
   .process {
-    flex: 1;
+    flex: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
     gap: 16px;
-    padding: 14px;
+    padding: 16px 14px;
   }
   .process-steps {
     display: grid;
@@ -1325,24 +1397,26 @@ body[data-scene-fallback="true"][data-panel="marka"] {
   }
   .marka-heading {
     gap: 10px;
-    padding: 12px 14px;
+    padding: 14px 16px;
   }
   .marka-heading h2 {
     font-size: 26px;
   }
   .marka-heading p:not(.status) {
-    display: none;
+    font-size: 13px;
+    line-height: 1.4;
   }
   .marka-wordmark {
     font-size: 22px;
   }
   .pipeline {
-    flex: 1;
+    flex: none;
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
-    justify-content: center;
+    justify-content: flex-start;
     border-bottom: 0;
+    padding: 16px 14px;
   }
   .pipeline li {
     flex: none;

@@ -75,11 +75,15 @@ export function setupPanels() {
     });
   }
 
-  choices(
+  const careerSteps = [...document.querySelectorAll("#career-flow .career-step")];
+  const selectCase = choices(
     $("case-selector"),
     cases.map((entry) => [entry.brand, entry.emphasis]),
     (index) => {
       const entry = cases[index];
+      careerSteps.forEach((step) => {
+        step.dataset.active = String(step.dataset.career === entry.id);
+      });
       text("case-title", entry.title);
       text("case-role", entry.role);
       text("case-caption", entry.brand);
@@ -117,6 +121,13 @@ export function setupPanels() {
       swap(diagram);
     },
   );
+  careerSteps.forEach((step) => {
+    if (step.tagName !== "BUTTON") return;
+    step.addEventListener("click", () => {
+      const idx = cases.findIndex((c) => c.id === step.dataset.career);
+      if (idx >= 0) selectCase(idx, true);
+    });
+  });
 
   let stageTimer = 0;
   const selectStage = choices(

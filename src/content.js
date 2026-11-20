@@ -2,16 +2,20 @@ export const cases = [
   {
     id: "moveit",
     brand: "MOVE IT Philippines",
-    emphasis: "Strategic Media Planning · Current",
+    emphasis: "Full-Funnel Media Planning · Current",
     summary:
       "Full-funnel media planning for a high-frequency motorcycle taxi challenger in Metro Manila.",
     title: "Planning beyond the dashboard.",
     role: "Digital Media Planner · M+C Saatchi Performance",
-    diagram: ["Business conditions", "User demand", "Media decisions"],
+    diagram: [
+      "Business & marketing context",
+      "External market conditions",
+      "Historical learning to high-performing channels",
+    ],
     tags: [
-      "Supply & weather",
-      "Traffic & competition",
-      "Audience & investment",
+      "Commercial targets & funnel",
+      "Supply, weather & competition",
+      "Channel mix & pacing",
     ],
     notes: {
       Context:
@@ -19,7 +23,7 @@ export const cases = [
       "My role":
         "Translate commercial ride targets into audience architecture, channel mix, investment pacing, and full-funnel media recommendations while aligning client and buying teams.",
       Thinking:
-        "Read platform signals alongside live operating conditions before deciding whether to reallocate budget, refresh creative angles, or hold spend when supply is constrained.",
+        "Read platform signals alongside live market conditions before deciding whether to reallocate budget, refine the audience, or control campaign pacing when external factors shift.",
       Learning:
         "Why it matters: dashboard metrics never tell the whole story. Effective media planning means diagnosing the real business bottleneck first so paid media scales demand only where operations can fulfill it.",
     },
@@ -27,16 +31,20 @@ export const cases = [
   {
     id: "grab",
     brand: "Grab Philippines",
-    emphasis: "No Sweat Summer · Integrated Media",
+    emphasis: "Always-On + Tactical Large Campaigns",
     summary:
-      "Integrated nationwide summer campaign connecting upper-funnel salience with daily app transactions.",
-    title: "No Sweat Summer: full-funnel media at scale.",
+      "Always-on acquisition paired with large-scale tactical campaigns across Summer, Holiday, and Christmas peaks.",
+    title: "Always-on scale meets tactical seasonal peaks.",
     role: "Media Executive / Senior Media Executive · M+C Saatchi Performance",
     diagram: ["Awareness", "Consideration", "Conversion"],
-    tags: ["Paid social", "Programmatic", "Media partners"],
+    tags: [
+      "Drive reach coverage and brand familiarity",
+      "Capture user intent",
+      "Drive repetitive usage",
+    ],
     notes: {
       Context:
-        "A flagship seasonal campaign during peak Philippine summer travel and commuting, requiring synchronized reach, viral film engagement, and app conversion across multiple channels.",
+        "Sustained always-on growth combined with flagship seasonal campaigns (Summer, Holiday, and Christmas), requiring synchronized reach, cultural engagement, and app conversion across channels.",
       "My role":
         "Owned end-to-end media activation and co-developed channel strategy with planning leads across paid social, programmatic video, and local publisher partnerships.",
       Thinking:
@@ -48,17 +56,21 @@ export const cases = [
   {
     id: "traveloka",
     brand: "Traveloka Malaysia",
-    emphasis: "#HargaBagus · Brand × Performance",
+    emphasis: "#HargaBagus Rebranding",
     summary:
-      "In-house brand-meets-performance campaign positioning Traveloka as Malaysia's smart value travel platform.",
+      "In-house brand rebranding campaign shifting price-trust perception across Malaysia's travel market.",
     title: "#HargaBagus: where brand meets performance.",
     role: "Senior Performance Marketing Analyst · Traveloka",
-    diagram: ["Brand priorities", "Product priorities", "Media strategy"],
-    tags: ["Audience", "Placement", "Measurement"],
+    diagram: ["Brand Priorities", "Media Strategy", "Measurement"],
+    tags: [
+      "Shift brand perception",
+      "Full-funnel execution from social to high-impact",
+      "Multi-layered measurement from brand lift to conversion lift",
+    ],
     outcome: "Coordinated campaign",
     notes: {
       Context:
-        "A Malaysia-market brand initiative (#HargaBagus) designed to build price-trust perception while maintaining commercial efficiency across flights and accommodation products.",
+        "A Malaysia-market brand rebranding initiative (#HargaBagus) designed to shift price-trust perception while maintaining commercial efficiency across flights and accommodation products.",
       "My role":
         "Planned and managed paid media investment in-house, leading cross-functional alignment between brand marketing, product commercial owners, and regional analytics.",
       Thinking:
